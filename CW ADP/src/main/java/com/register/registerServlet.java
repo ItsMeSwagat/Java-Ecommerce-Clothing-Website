@@ -53,18 +53,19 @@ public class registerServlet extends HttpServlet {
                 //Passing message via session.
                 hs.setAttribute("success-message", message);
                
-                //Sending response back to the user/customer
-                response.sendRedirect("register.html");
             } else {
                  //If customer fails to register 
-                String message = "Customer registration fail";
+                String message = "Customer registration failed";
                 //Passing message via session.
                 hs.setAttribute("fail-message", message);
-                //Sending response back to the user/customer
-                response.sendRedirect("register.html");
+          
             }
+            dispatcher.forward(request, response);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+        finally {
+        	DatabaseConnection.CloseConnection();
         }
 
 	}
