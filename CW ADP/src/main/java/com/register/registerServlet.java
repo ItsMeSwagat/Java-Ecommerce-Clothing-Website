@@ -46,16 +46,16 @@ public class registerServlet extends HttpServlet {
         	pst.setString(6, image);
         	
         	int rowCount = pst.executeUpdate();
-        	dispatcher = request.getRequestDispatcher("register.html");
+        	dispatcher = request.getRequestDispatcher("register.jsp");
             //If customer registered successfully in java online shopping system
             if (rowCount > 0) {
-                String message = "Customer registered successfully.";
+                String message = "Account Registered Successfully!!";
                 //Passing message via session.
                 hs.setAttribute("success-message", message);
                
             } else {
-                 //If customer fails to register 
-                String message = "Customer registration failed";
+            	  //If customer fails to register 
+                String message = "Account Registration failed!!";
                 //Passing message via session.
                 hs.setAttribute("fail-message", message);
           
@@ -63,6 +63,7 @@ public class registerServlet extends HttpServlet {
             dispatcher.forward(request, response);
         } catch (Exception ex) {
             ex.printStackTrace();
+           
         }
         finally {
         	DatabaseConnection.CloseConnection();

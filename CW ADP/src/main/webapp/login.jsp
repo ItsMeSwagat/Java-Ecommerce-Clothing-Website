@@ -22,7 +22,7 @@
             <input type="email" name="email" placeholder="Enter your email" required class="box">
             <input type="password" name="password" placeholder="Enter your password" required class="box">
             <input type="submit" name="submit" value="Login now" class="btn">
-            <p>Don't have an account? <a href="register.html">register now</a></p>
+            <p>Don't have an account? <a href="register.jsp">register now</a></p>
         </form>
     </div>
 </body>
