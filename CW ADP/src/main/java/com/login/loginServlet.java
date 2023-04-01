@@ -21,10 +21,8 @@ import com.connection.DatabaseConnection;
 @WebServlet("/login")
 public class loginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+	private final String ADMIN_ID = "admin@gmail.com";
+	private final String ADMIN_PASSWORD = "admin";
     public loginServlet() {
         super();
         // TODO Auto-generated constructor stub
@@ -44,10 +42,13 @@ public class loginServlet extends HttpServlet {
 			pst.setString(2, password);
 			
 			ResultSet rs = pst.executeQuery();
-			if(rs.next()) {
+			if(ADMIN_ID.equals(email)&& ADMIN_PASSWORD.equals(password)) {
+				dispatcher = request.getRequestDispatcher("admin.jsp");
+			}
+			else if(rs.next()) {
 				hs.setAttribute("email", rs.getString("email"));
 				dispatcher = request.getRequestDispatcher("index.jsp");
-			}else {
+			} else {
 				request.setAttribute("status", "failed");
 				dispatcher = request.getRequestDispatcher("login.jsp");
 			}
