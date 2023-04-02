@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,11 +22,10 @@ import com.connection.DatabaseConnection;
 @WebServlet("/login")
 public class loginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final String ADMIN_ID = "admin@gmail.com";
-	private final String ADMIN_PASSWORD = "admin";
+	
     public loginServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,24 +42,40 @@ public class loginServlet extends HttpServlet {
 			pst.setString(2, password);
 			
 			ResultSet rs = pst.executeQuery();
-			if(ADMIN_ID.equals(email)&& ADMIN_PASSWORD.equals(password)) {
-				dispatcher = request.getRequestDispatcher("admin.jsp");
-			}
-			else if(rs.next()) {
-				hs.setAttribute("email", rs.getString("email"));
-				dispatcher = request.getRequestDispatcher("index.jsp");
-			} else {
-				request.setAttribute("status", "failed");
-				dispatcher = request.getRequestDispatcher("login.jsp");
-			}
-			dispatcher.forward(request, response);
-			
+			 if (email.isEmpty() == false || password.isEmpty()== false) {
+	                if (rs.next()) {
+	                    //Storing the login details in session
+	                    hs.setAttribute("name", rs.getString("name"));
+	                    //Redirecting response to the index.jsp
+	                    dispatcher = request.getRequestDispatcher("index.jsp");
+	                } else {
+	                    //If wrong credentials are entered
+	                    String message = "You have entered wrong credentials";
+	                    hs.setAttribute("credential", message);
+	                    //Redirecting response to the login.jsp
+	                    response.sendRedirect("login.jsp");
+	                }
+	           } else {
+	                //If username or password is empty or null
+	                String message = "Please enter both Email or Password ";
+	                hs.setAttribute("credential", message);
+	                //Redirecting response to the login.jsp
+	                response.sendRedirect("login.jsp");
+	            }
+			 dispatcher.forward(request, response);
 			
 		}catch(Exception e){
 			e.printStackTrace();
+			
 		}
+		finally {
+        	DatabaseConnection.CloseConnection();
+        }
 		
+
 		
 	}
-
+		
 }
+
+

@@ -18,6 +18,30 @@ import com.connection.DatabaseConnection;
 @WebServlet("/register")
 public class registerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private boolean validateData(String name, String email, String phonenumber, String address, String password, String image) {
+	    // Add your validation logic here
+	    if (name == null || name.trim().isEmpty()) {
+	        return false;
+	    }
+	    if (email == null || email.trim().isEmpty()) {
+	        return false;
+	    }
+	    if (phonenumber == null || phonenumber.trim().isEmpty()) {
+	        return false;
+	    }
+	    if (address == null || address.trim().isEmpty()) {
+	        return false;
+	    }
+	    if (password == null || password.trim().isEmpty()) {
+	        return false;
+	    }
+	    if (image == null || image.trim().isEmpty()) {
+	        return false;
+	    }
+	    return true;
+	}
+
        
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,42 +56,77 @@ public class registerServlet extends HttpServlet {
 		HttpSession hs = request.getSession();
 		RequestDispatcher dispatcher = null;
 		
-		 //Inserting all values inside the database
-        try {
-            //Connecting database connection and querying in the database
-        	Connection con = DatabaseConnection.getConnection();
-        	String query = "insert into user(name,email,phonenumber,address,password,image)" + "values(?,?,?,?,?,?)";;
-        	PreparedStatement pst = con.prepareStatement(query);
-        	pst.setString(1, name);
-        	pst.setString(2, email);
-        	pst.setString(3, phonenumber);
-        	pst.setString(4, address);
-        	pst.setString(5, password);
-        	pst.setString(6, image);
-        	
-        	int rowCount = pst.executeUpdate();
-        	dispatcher = request.getRequestDispatcher("register.jsp");
-            //If customer registered successfully in java online shopping system
-            if (rowCount > 0) {
-                String message = "Account Registered Successfully!!";
-                //Passing message via session.
-                hs.setAttribute("success-message", message);
-               
-            } else {
-            	  //If customer fails to register 
-                String message = "Account Registration failed!!";
-                //Passing message via session.
-                hs.setAttribute("fail-message", message);
-          
-            }
-            dispatcher.forward(request, response);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-           
-        }
-        finally {
-        	DatabaseConnection.CloseConnection();
-        }
+		try {
+		if (validateData(name, email, phonenumber, address, password, image)) {
+		    // Insert data into the database
+		    Connection con = DatabaseConnection.getConnection();
+		    String query = "insert into user(name,email,phonenumber,address,password,image)" + "values(?,?,?,?,?,?)";;
+		    PreparedStatement pst = con.prepareStatement(query);
+		    pst.setString(1, name);
+		    pst.setString(2, email);
+		    pst.setString(3, phonenumber);
+		    pst.setString(4, address);
+		    pst.setString(5, password);
+		    pst.setString(6, image);
+		        	
+		    int rowCount = pst.executeUpdate();
+		    dispatcher = request.getRequestDispatcher("register.jsp");
+		    if (rowCount > 0) {
+		        hs.setAttribute("credential", "Account Registered Successfully!!");
+		    } else {
+		        hs.setAttribute("credential", "Account Registration failed!!");
+		    }
+		    dispatcher.forward(request, response);
+		} else {
+		    // Data is not valid, show an error message
+		    hs.setAttribute("credential", "Please enter all the details!!");
+		    dispatcher = request.getRequestDispatcher("register.jsp");
+		    dispatcher.forward(request, response);
+		}
+
+//		 //Inserting all values inside the database
+//        try {
+//            //Connecting database connection and querying in the database
+//        	Connection con = DatabaseConnection.getConnection();
+//        	String query = "insert into user(name,email,phonenumber,address,password,image)" + "values(?,?,?,?,?,?)";;
+//        	PreparedStatement pst = con.prepareStatement(query);
+//        	pst.setString(1, name);
+//        	pst.setString(2, email);
+//        	pst.setString(3, phonenumber);
+//        	pst.setString(4, address);
+//        	pst.setString(5, password);
+//        	pst.setString(6, image);
+//        	
+//        	int rowCount = pst.executeUpdate();
+//        	dispatcher = request.getRequestDispatcher("register.jsp");
+//            //If customer registered successfully in java online shopping system
+//            if (rowCount > 0) {
+//                //Passing message via session.
+//                hs.setAttribute("message", "Account Registered Successfully!!");
+//               
+//            } else {
+//                //Passing message via session.
+//                hs.setAttribute("message", "Account Registration failed!!");
+//          
+//            }
+//            dispatcher.forward(request, response);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//           
+//        }
+//        finally {
+//        	DatabaseConnection.CloseConnection();
+//        }
+		
+		}
+		catch (Exception ex){
+			hs.setAttribute("credential", "Please enter valid email.");
+			dispatcher = request.getRequestDispatcher("register.jsp");
+		    dispatcher.forward(request, response);
+			
+			
+		}
+		
 
 	}
 

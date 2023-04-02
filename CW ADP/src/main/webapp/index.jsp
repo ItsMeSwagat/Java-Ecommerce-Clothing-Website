@@ -2,11 +2,12 @@
     pageEncoding="ISO-8859-1"%>
     
 <% 
-	if(session.getAttribute("email")== null){
+	String name = (String) session.getAttribute("name");
+	if(session.getAttribute("name")== null){
 		response.sendRedirect("login.jsp");
 	}
 	else{
-		
+		session.removeAttribute("name");
 	}
 
 %>    
@@ -20,5 +21,6 @@
 </head>
 <body>
 	<h1>Welcome</h1>
+	<%= name %>
 </body>
 </html>

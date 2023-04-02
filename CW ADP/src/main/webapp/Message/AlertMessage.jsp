@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Successful Alert Message</title>
+<title> Alert Message</title>
 
 <style>
 	.alert {
@@ -38,32 +38,20 @@
 
 <%
 
-String Smessage = (String) session.getAttribute("success-message");
-String Fmessage = (String) session.getAttribute("fail-message");
-if(Smessage != null){
+String message = (String) session.getAttribute("credential");
+
+if(message != null){
 	
 %>
 <div class="alert" role="alert">
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  <strong><%= Smessage %></strong>
+  <strong><%= message %></strong>
 </div>
 
 <%
-session.removeAttribute("success-message");
+session.removeAttribute("credential");
 }
-else if(Fmessage != null){
 %>
 
-	<div class="alert" role="alert">
-  		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  		<strong><%= Fmessage %></strong>
-	</div>
-	
-<% 
-session.removeAttribute("fail-message");
-}
-	
-%>	
-	
 </body>
 </html>

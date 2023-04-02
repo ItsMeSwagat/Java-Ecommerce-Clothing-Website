@@ -18,9 +18,10 @@
 <body>
     <div class="form-container">
         <form action="login" method="post">
+        	<%@include file="Message/AlertMessage.jsp"%>
             <h3>Login Now</h3>
-            <input type="email" name="email" placeholder="Enter your email" required class="box">
-            <input type="password" name="password" placeholder="Enter your password" required class="box">
+            <input type="email" name="email" placeholder="Enter your email" class="box">
+            <input type="password" name="password" placeholder="Enter your password" class="box">
             <input type="submit" name="submit" value="Login now" class="btn">
             <p>Don't have an account? <a href="register.jsp">register now</a></p>
         </form>
