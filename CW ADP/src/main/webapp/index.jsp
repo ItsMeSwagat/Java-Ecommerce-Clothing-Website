@@ -10,7 +10,8 @@
 		session.removeAttribute("name");
 	}
 
-%>    
+%>
+    
     
     
 <!DOCTYPE html>
@@ -20,6 +21,7 @@
 <title>Home</title>
 </head>
 <body>
+	<%@include file= "navbar.jsp"%>
 	<h1>Welcome</h1>
 	<%= name %>
 </body>

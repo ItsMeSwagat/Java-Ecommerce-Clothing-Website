@@ -1,3 +1,17 @@
+<%
+	boolean isAdmin = (boolean) session.getAttribute("current_user");
+	if (isAdmin == false){
+		
+		session.setAttribute("credential", "You are not Admin!! No Access");
+		response.sendRedirect("login.jsp");
+		return;
+	}
+%>
+
+
+
+
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -26,9 +40,9 @@
 
         <nav class="navbar">
             <a href="#">Home</a>
-            <a href="admin_product.html">Products</a>
-            <a href="">Orders</a>
-            <a href="">Users</a>
+            <a href="admin_product.jsp">Products</a>
+            <a href="admin_order.jsp">Orders</a>
+            
         </nav>
 
         <div class="icons">
@@ -39,7 +53,7 @@
         <div class="account-box">
             <p>username: <span>admin</span></p>
             <p>email: <span>admin@gmail.com</span></p>
-            <a href="logout" class="delete-btn">logout</a>
+            <a href="logout"  class="delete-btn">logout</a>
         </div>
     </div>
 </header>

@@ -32,7 +32,7 @@ public class loginServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		HttpSession hs = request.getSession();
-		RequestDispatcher dispatcher = null;
+		
 		
 		
 		try {
@@ -45,9 +45,18 @@ public class loginServlet extends HttpServlet {
 			 if (email.isEmpty() == false || password.isEmpty()== false) {
 	                if (rs.next()) {
 	                    //Storing the login details in session
+	                    hs.setAttribute("current_user", rs.getBoolean("isAdmin"));
 	                    hs.setAttribute("name", rs.getString("name"));
-	                    //Redirecting response to the index.jsp
-	                    dispatcher = request.getRequestDispatcher("index.jsp");
+	                    
+	                    
+	                    if(rs.getBoolean("isAdmin")) {
+	                    	response.sendRedirect("admin.jsp");
+	                    }
+	                    else {
+	                    	 //Redirecting response to the index.jsp
+		                    response.sendRedirect("index.jsp");
+	                    }
+	                   
 	                } else {
 	                    //If wrong credentials are entered
 	                    String message = "You have entered wrong credentials";
@@ -62,7 +71,7 @@ public class loginServlet extends HttpServlet {
 	                //Redirecting response to the login.jsp
 	                response.sendRedirect("login.jsp");
 	            }
-			 dispatcher.forward(request, response);
+			 
 			
 		}catch(Exception e){
 			e.printStackTrace();

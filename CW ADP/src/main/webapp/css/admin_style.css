@@ -64,6 +64,15 @@ section{
     font-size: 4rem;
 }
 
+.empty{
+	padding: 1.5rem;
+	text-align: center;
+	border: var(--border);
+	background-color: var(--white);
+	color: var(--red);
+	font-size: 2rem;
+}
+
 /*Admin Header */
 
 
@@ -260,6 +269,98 @@ section{
     border: var(--border);
 }
 
+/* add product end */
+
+
+/*show product start */
+
+.show-products{
+    padding-top: 0;
+}
+
+.show-products .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 30rem);
+    justify-content: center;
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+.show-products .box-container .box{
+    text-align: center;
+    padding: 2rem;
+    border-radius: .5rem;
+    border: var(--border);
+    box-shadow: var(--box-shadow);
+    background-color: var(--white);
+}
+.show-products .box-container .box img{
+    height: 25rem;
+}
+
+.show-products .box-container .box .name{
+    padding: 1rem 0;
+    font-size: 2rem;
+    color: var(--black);
+}
+
+.show-products .box-container .box .price{
+    padding: 1rem 0;
+    font-size: 2rem;
+    color: var(--red);
+}
+
+/*show product end */
+
+/*edit product start */
+
+.edit-product-form{
+    min-height: 100vh;
+    background-color: rgba(0,0,0,.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    overflow-y: scroll;
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 1200;
+    width: 100%;
+    
+}
+.edit-product-form.active{
+    display: flex;
+}
+
+.edit-product-form form{
+    width: 50rem;
+    padding: 2rem;
+    text-align: center;
+    border-radius: .5rem;
+    border: var(--border);
+    background-color: var(--white);
+}
+
+.edit-product-form form img{
+    height: 25rem;
+    margin-bottom: 1rem;
+}
+
+.edit-product-form form .box{
+    margin: 1rem 0;
+    padding: 1.2rem 1.4rem;
+    border: var(--border);
+    border-radius: .5rem;
+    background-color: var(--light-bg);
+    font-size: 1.8rem;
+    color: var(--black);
+    width: 100%;
+}
+
+
+/* edit product end*/
 
 
 
