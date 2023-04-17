@@ -20,7 +20,7 @@
 	
     <div class="form-container">
     	
-        <form action="register" method="post">
+        <form action="register" method="post" enctype="multipart/form-data">
         	<%@include file="Message/AlertMessage.jsp"%>
             <h3>Register Now</h3>
             <input type="text" name="name" placeholder="Enter your Name*"  class="box">

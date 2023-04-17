@@ -1,6 +1,6 @@
 package com.register;
 
-public class register {
+public class user {
 	
 	private String name, email, phonenumber, address, password, image;
 

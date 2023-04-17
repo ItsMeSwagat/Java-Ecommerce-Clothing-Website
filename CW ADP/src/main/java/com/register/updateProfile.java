@@ -1,4 +1,4 @@
-package com.productOperation;
+package com.register;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,60 +20,64 @@ import javax.servlet.http.Part;
 import com.connection.DatabaseConnection;
 
 /**
- * Servlet implementation class updateProduct
+ * Servlet implementation class updateProfile
  */
-@WebServlet("/updateProduct")
+@WebServlet("/updateProfile")
 @MultipartConfig
-public class updateProduct extends HttpServlet {
+public class updateProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
-    public updateProduct() {
-        super();
        
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public updateProfile() {
+        super();
+        // TODO Auto-generated constructor stub
     }
 
-
+	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
         String message = "";
 
-        String p_id = request.getParameter("u_p_id");
-        String p_name = request.getParameter("u_name");
-        String p_price = request.getParameter("u_price");
-        String p_quantity = request.getParameter("u_quantity");
-        String p_category = request.getParameter("u_category");
+        String email = request.getParameter("old_email");
+        String name = request.getParameter("updateName");
+        String phonenumber = request.getParameter("updatePhonenumber");
+        String address = request.getParameter("updateAddress");
+        String password = request.getParameter("updatePassword");
 
-        Part part = request.getPart("u_image");
+        Part part = request.getPart("updateImage");
         String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
         InputStream fileContent = part.getInputStream();
         Files.copy(fileContent, Paths.get(getServletContext().getRealPath("/images"), fileName),
                StandardCopyOption.REPLACE_EXISTING);
-
+        
+        
         try {
             Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement(
-                    "UPDATE product SET p_name=?, p_price=?, p_quantity=?, p_category=?, p_image=? WHERE p_id=?");
-            ps.setString(1, p_name);
-            ps.setString(2, p_price);
-            ps.setString(3, p_quantity);
-            ps.setString(4, p_category);
+                    "UPDATE user SET name=?, phonenumber=?, address=?, password=?, image=? WHERE email=?");
+            ps.setString(1, name);
+            ps.setString(2, phonenumber);
+            ps.setString(3, address);
+            ps.setString(4, password);
             ps.setString(5, fileName);
-            ps.setString(6, p_id);
+            ps.setString(6, email);
 
             int rowUpdated = ps.executeUpdate();
             if (rowUpdated > 0) {
-                message = "Product updated successfully!";
+                message = "Profile updated successfully!";
                 
             } else {
-                message = "Error updating product!";
+                message = "Error updating profile!";
             }
         } catch (Exception e) {
-            message = "Error updating product: " + e.getMessage();
+            message = "Error updating profile: " + e.getMessage();
         }
 
         session.setAttribute("credential", message);
-        response.sendRedirect("admin_product.jsp");
+        response.sendRedirect("index.jsp");
     
 	}
 

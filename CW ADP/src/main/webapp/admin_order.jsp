@@ -1,10 +1,28 @@
+<%
+
+if(session.getAttribute("current_user") != null){
+	int isAdmin = (int) session.getAttribute("current_user");
+	if (isAdmin != 1){
+		
+		session.setAttribute("credential", "You are not Admin!! No Access");
+		response.sendRedirect("login.jsp");
+		return;
+	}
+}
+else{
+	session.setAttribute("credential","Please login first!!");
+	response.sendRedirect("login.jsp");
+}
+
+%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>orders</title>
 
 <!-- Font awesome link-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -34,21 +52,42 @@
         <div class="account-box">
             <p>username: <span>admin</span></p>
             <p>email: <span>admin@gmail.com</span></p>
-            <a href="login.html" class="delete-btn">logout</a>
+            <a href="logout" class="delete-btn">logout</a>
         </div>
     </div>
 </header>
 
 <!--Header Ends-->
 
-<section class="order">
-	<h1 class="title">placed orders</h1>
+<section class="orders">
 	
 	<div class="box-container">
-	
+		<div class="box">
+			<p>order id : <span># 001</span></p>
+			<p>placed on : <span># 001</span></p>
+			<p>name : <span># 001</span></p>
+			<p>number : <span># 001</span></p>
+			<p>email : <span># 001</span></p>
+			<p>address : <span># 001</span></p>
+			<p>total products : <span># 001</span></p>
+			<p>total price : <span># 001</span></p>
+		</div>
+	</div>
+	<div class="box-container">
+		<div class="box">
+			<p>order id : <span># 001</span></p>
+			<p>placed on : <span># 001</span></p>
+			<p>name : <span># 001</span></p>
+			<p>number : <span># 001</span></p>
+			<p>email : <span># 001</span></p>
+			<p>address : <span># 001</span></p>
+			<p>total products : <span># 001</span></p>
+			<p>total price : <span># 001</span></p>
+		</div>
 	</div>
 	
 </section>
 
+<script src="js/admin.js"></script>
 </body>
 </html>

@@ -1,11 +1,21 @@
 <%
-	boolean isAdmin = (boolean) session.getAttribute("current_user");
-	if (isAdmin == false){
+if(session.getAttribute("current_user") != null){
+	int isAdmin = (int) session.getAttribute("current_user");
+	if (isAdmin != 1){
 		
 		session.setAttribute("credential", "You are not Admin!! No Access");
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("index.jsp");
 		return;
 	}
+}
+else{
+	session.setAttribute("credential","Please login first!!");
+	response.sendRedirect("login.jsp");
+}
+
+	
+	String name = (String) session.getAttribute("name");
+	String email = (String) session.getAttribute("email");
 %>
 
 
@@ -33,7 +43,7 @@
 <body>
 
 <header class="header">
-
+	<%@include file="Message/AlertMessage.jsp"%>
     <div class="flex">
 
         <a href="" class="logo">Admin<span>Panel</span></a>
@@ -51,8 +61,8 @@
         </div>
         
         <div class="account-box">
-            <p>username: <span>admin</span></p>
-            <p>email: <span>admin@gmail.com</span></p>
+            <p>name: <span><%=name %></span></p>
+            <p>email: <span><%=email %></span></p>
             <a href="logout"  class="delete-btn">logout</a>
         </div>
     </div>
@@ -66,12 +76,7 @@
     <div class="box-container">
         <div class="box">
             <h3>0</h3>
-            <p>Total Pendings</p>
-        </div>
-
-        <div class="box">
-            <h3>0</h3>
-            <p>Completed Payments</p>
+            <p>Total Users</p>
         </div>
 
         <div class="box">
@@ -84,15 +89,6 @@
             <p>Products added</p>
         </div>
 
-        <div class="box">
-            <h3>0</h3>
-            <p>Normal Users</p>
-        </div>
-
-        <div class="box">
-            <h3>0</h3>
-            <p>Admin Users</p>
-        </div>
     </div>
 
 </section>

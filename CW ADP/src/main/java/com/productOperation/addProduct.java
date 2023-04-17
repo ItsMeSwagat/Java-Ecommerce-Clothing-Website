@@ -56,7 +56,7 @@ public class addProduct extends HttpServlet {
 				InputStream fileContent = part.getInputStream();
 				Files.copy(fileContent, Paths.get(getServletContext().getRealPath("/images"), fileName), StandardCopyOption.REPLACE_EXISTING);
 				p.setP_image(fileName);
-		
+				
 		try {
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement ps = con.prepareStatement("INSERT INTO product (p_name, p_price, p_quantity, p_category, p_image) VALUES (?, ?, ?, ?, ?)");

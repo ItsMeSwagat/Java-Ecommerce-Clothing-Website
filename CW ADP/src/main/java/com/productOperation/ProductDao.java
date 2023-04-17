@@ -81,7 +81,7 @@ public class ProductDao {
             PreparedStatement preparedStatement = con.prepareStatement(
                     "UPDATE product SET p_name=?, p_price=?, p_quantity=?, p_category=?, p_image=? WHERE p_id=?");
             preparedStatement.setString(1, product.getP_name());
-            preparedStatement.setDouble(2, product.getP_price());
+            preparedStatement.setInt(2, product.getP_price());
             preparedStatement.setInt(3, product.getP_quantity());
             preparedStatement.setString(4, product.getP_category());
             preparedStatement.setString(5, product.getP_image());

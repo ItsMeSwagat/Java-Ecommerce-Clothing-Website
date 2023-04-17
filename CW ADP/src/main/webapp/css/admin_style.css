@@ -8,6 +8,7 @@
     --black:#333;
     --white:#fff;
     --light-color:#666;
+    --light-white: #ccc;
     --light-bg:#f5f5f5;
     --border: .1rem solid var(--purple
     );
@@ -93,6 +94,11 @@ section{
 .white-btn,
 .btn{
     background-color: var(--purple);
+}
+
+.white-btn:hover{
+	background-color: var(--white);
+	color: var(--black);
 }
 
 .option-btn{
@@ -319,7 +325,7 @@ section{
 .edit-product-form{
     min-height: 100vh;
     background-color: rgba(0,0,0,.5);
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     padding: 2rem;
@@ -363,8 +369,45 @@ section{
 /* edit product end*/
 
 
+/* Order */
 
+.orders{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 30rem);
+    justify-content: center;
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
 
+.orders .box-container .box{
+	background-color: var(--white);
+	padding: 2rem;
+	border: var(--border);
+	box-shadow: var(--box-shadow);
+	border-radius: .5rem;
+}
+
+.orders .box-container .box p{
+	padding-bottom: 1rem;
+	font-size: 2rem;
+	color: var(--light-color);
+}
+
+.orders .box-container .box p span{
+	color: var(--purple);
+	
+}
+
+.orders .box-container .box form select{
+	width: 100%;
+	background-color: var(--light-bg);
+	border: var(--border);
+	padding: 1.2rem 1.4rem;
+	font-size: 1.8rem;
+	color: var(--black);
+}
 
 
 

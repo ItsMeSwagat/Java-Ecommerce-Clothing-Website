@@ -12,9 +12,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
 import com.connection.DatabaseConnection;
+import com.register.UserDao;
+import com.register.user;
 
 /**
  * Servlet implementation class loginServlet
@@ -32,8 +34,7 @@ public class loginServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		HttpSession hs = request.getSession();
-		
-		
+	
 		
 		try {
 			Connection con = DatabaseConnection.getConnection();
@@ -45,16 +46,22 @@ public class loginServlet extends HttpServlet {
 			 if (email.isEmpty() == false || password.isEmpty()== false) {
 	                if (rs.next()) {
 	                    //Storing the login details in session
-	                    hs.setAttribute("current_user", rs.getBoolean("isAdmin"));
+	                    hs.setAttribute("current_user", rs.getInt("isAdmin"));
 	                    hs.setAttribute("name", rs.getString("name"));
 	                    
 	                    
-	                    if(rs.getBoolean("isAdmin")) {
+	                    if(rs.getInt("isAdmin")== 1) {
 	                    	response.sendRedirect("admin.jsp");
+	                    	hs.setAttribute("name",rs.getString("name"));
+	                    	hs.setAttribute("email", rs.getString("email"));
 	                    }
 	                    else {
 	                    	 //Redirecting response to the index.jsp
 		                    response.sendRedirect("index.jsp");
+		                    hs.setAttribute("email",rs.getString("email"));
+		                    Cookie user= new Cookie("user",rs.getString("email") );
+		                    response.addCookie(user);
+		                    
 	                    }
 	                   
 	                } else {

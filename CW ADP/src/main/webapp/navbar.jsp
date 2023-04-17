@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="com.register.*" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +19,7 @@
 </head>
 <body>
     <header class="header">
+    	<%@include file="Message/AlertMessage.jsp"%>
         <div class="header-1">
             <div class="flex">
                 <div class="share">
@@ -25,36 +28,39 @@
                     <a href="#" class="fab fa-instagram"></a>
                     <a href="#" class="fab fa-linkedin"></a>
                 </div>
-                <p><a href="login.html">Login</a> | <a href="register.html">Register</a></p>
+                <p><a href="login.jsp">Login</a> | <a href="register.jsp">Register</a></p>
             </div>
         </div>
 
         <div class="header-2">
             <div class="flex">
-                <a href="#" class="logo">Shopify</a>
+                <a href="index.jsp" class="logo">Shopify</a>
 
                 <nav class="navbar">
-                    <a href="">Home</a>
-                    <a href="">Shop</a>
-                    <a href="">Cart</a>
+                    <a href="index.jsp">Home</a>
+                    <a href="shop.jsp">Shop</a>
+                    <a href="cart.jsp">Cart</a>
                     <a href="">Orders</a>
                 </nav>
 
                 <div class="icons">
                     <div id="menu-btn" class="fas fa-bars"></div>
-                    <a href=""><i class="fas fa-search"></i></a>
-                    <div id="user-btn" class="fas fa-user"></div>
-                    <a href=""><i class="fas fa-shopping-cart"></i><span>(00)</span></a>
-                </div>
-                <div class="user-box">
-                    <p>name: <span>user</span></p>
-                    <p>email: <span>user@gmail.com</span></p>
-                    <a href="" class="delete-btn">logout</a>
+                    <a href=""><img class="icon" src="images/search.png" style="width: 2.4rem; height: 2.4rem;"></a>
+                    <c:if test="${not empty sessionScope.email}">
+                    <%
+                    String email = (String) session.getAttribute("email");           
+                    UserDao userDao = new UserDao();
+                    user u = userDao.getUserByEmail(email);
+                    
+                    %>
+                    <a href="updateProfile.jsp?uemail=<%=u.getEmail() %>" id="user-btn"><img src="images/user.png" style="width: 2.4rem; height: 2.4rem;"></a>
+                    </c:if>
+                    <a href=""><i class="fas fa-shopping-cart"></i></a>
                 </div>
             </div>
         </div>
     </header>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
