@@ -74,6 +74,36 @@ public class ProductDao {
         }
         return product;
     }
+    
+    public List<product> getProductByCategory(String p_category) {
+        List<product> productList = new ArrayList<>();
+        String query = "SELECT * FROM product WHERE p_category = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection(); 
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setString(1, p_category);
+
+            ResultSet resultSet = stmt.executeQuery();
+
+            while (resultSet.next()) {
+                product product = new product();
+                product.setP_id(resultSet.getInt("p_id"));
+                product.setP_name(resultSet.getString("p_name"));
+                product.setP_price(resultSet.getInt("p_price"));
+                product.setP_quantity(resultSet.getInt("p_quantity"));
+                product.setP_category(resultSet.getString("p_category"));
+                product.setP_image(resultSet.getString("p_image"));
+                productList.add(product);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return productList;
+    }
+
+    
 
     // update an existing product
     public void updateProduct(product product) {

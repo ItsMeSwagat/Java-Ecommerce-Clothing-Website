@@ -55,7 +55,7 @@
                     %>
                     <a href="updateProfile.jsp?uemail=<%=u.getEmail() %>" id="user-btn"><img src="images/user.png" style="width: 2.4rem; height: 2.4rem;"></a>
                     </c:if>
-                    <a href=""><i class="fas fa-shopping-cart"></i></a>
+                    <a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a>
                 </div>
             </div>
         </div>

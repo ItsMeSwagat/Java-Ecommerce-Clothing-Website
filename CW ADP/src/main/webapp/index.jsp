@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="com.productOperation.product" %>
+<%@ page import="com.productOperation.*" %>
+<%@ page import="java.util.List" %>
     
 <% 
 	String name = (String) session.getAttribute("name");
@@ -31,9 +34,7 @@
 <meta charset="ISO-8859-1">
 <title>Home</title>
 
-  <!-- Font awesome link-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+  
     <!--css link-->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -45,7 +46,7 @@
 	<div class="content">
 		<h3>Get the clothes at the greatest Quality.</h3>
 		<p>lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsum lorem ipsum</p>
-		<a href="" class="white-btn">discover more</a>
+		<a href="shop.jsp" class="white-btn">discover more</a>
 	</div>
 	
 	
@@ -54,37 +55,21 @@
 	<section class="products">
 		<h1 class="title">latest products</h1>
 		<div class="box-container">
+		<%
+        ProductDao productDao = new ProductDao();
+        List<product> productList = productDao.getAllProducts();
+        for (product product : productList) {
+    	%>
 				<div class="box">
-					<img src="images/hoodie3.jpg">
-					<div class="name">Yellow Tshirt</div>
-					<div class="price">Rs 1200 /-</div>
-					<input type="number" min="1" name="product_quantity" value="1" class="qty">
+					<img src="images/<%= product.getP_image() %>">
+					<div class="name"><%= product.getP_name() %></div>
+					<div class="price">Rs<%= product.getP_price() %> /-</div>
+					<input type="number" min="1" name="product_quantity" value="1" max="<%= product.getP_quantity() %>" class="qty">
 					<input type="submit" value="add to cart" name="add-to cart" class="btn">
 				</div>
-				
-				<div class="box">
-					<img src="images/hoodie1.jpg">
-					<div class="name">Yellow Tshirt</div>
-					<div class="price">Rs 1200 /-</div>
-					<input type="number" min="1" name="product_quantity" value="1" class="qty">
-					<input type="submit" value="add to cart" name="add-to cart" class="btn">
-				</div>
-				
-				<div class="box">
-					<img src="images/hoodie2.jpg">
-					<div class="name">Yellow Tshirt</div>
-					<div class="price">Rs 1200 /-</div>
-					<input type="number" min="1" name="product_quantity" value="1" class="qty">
-					<input type="submit" value="add to cart" name="add-to cart" class="btn">
-				</div>
-				
-				<div class="box">
-					<img src="images/hoodie2.jpg">
-					<div class="name">Yellow Tshirt</div>
-					<div class="price">Rs 1200 /-</div>
-					<input type="number" min="1" name="product_quantity" value="1" class="qty">
-					<input type="submit" value="add-to-cart" name="add-to-cart" class="btn">
-				</div>
+		 <%
+        }
+    	%>		
 		</div>
 	</section>
 	
