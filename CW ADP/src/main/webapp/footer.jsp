@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <p class="credit"><span>Shopify @ 2023 | all rights reserved</span></p>
+    <p class="credit"><span>Shopify &copy; 2023 | all rights reserved</span></p>
 </section>              
 </body>
 </html>

@@ -41,7 +41,7 @@
                     <span>New Password :</span>
                     <input type="password" name="updatePassword" placeholder="Enter new password"  class="box" value="<%= u.getPassword()%>">
                     <span>Pic :</span>          
-                    <input type="file" accept="image/jpg, image/jpeg, image/png" class="box" name="updateImage">
+                    <input type="file" accept="image/jpg, image/jpeg, image/png" class="box" name="updateImage" value="<%= u.getImage() %>">
                 </div>
             </div>
             <input type="submit" value="update profile" name="update_profile" class="btn">

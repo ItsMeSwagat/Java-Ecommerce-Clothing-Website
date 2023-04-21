@@ -3,6 +3,24 @@
 <%@ page import="com.productOperation.product" %>
 <%@ page import="com.productOperation.*" %>
 <%@ page import="java.util.List" %>
+
+<%
+if(session.getAttribute("current_user") != null){
+	int isAdmin = (int) session.getAttribute("current_user");
+	if (isAdmin == 1){
+		
+		session.setAttribute("credential", "You are Admin!! No access to this page");
+		response.sendRedirect("admin.jsp");
+		return;
+	}
+}
+
+
+%>
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,11 +72,14 @@
 			for (product product : productList){
 		%>		
 			<div class="box">
+					<form method="post" action="AddToCart">
+					<input type="hidden" name="productId" value="<%= product.getP_id()%>">
 					<img src="images/<%= product.getP_image() %>">
 					<div class="name"><%= product.getP_name() %></div>
 					<div class="price">Rs<%= product.getP_price() %> /-</div>
-					<input type="number" min="1" name="product_quantity" value="1" max="<%= product.getP_quantity() %>" class="qty">
+					<input type="number" min="1" name="quantity" value="1" max="<%= product.getP_quantity() %>" class="qty">
 					<input type="submit" value="add to cart" name="add-to cart" class="btn">
+					</form>
 				</div>
 			
 		<%
@@ -73,11 +94,14 @@
 			for (product product : productList){		
 		%>
 			<div class="box">
+					<form method="post" action="AddToCart">
+					<input type="hidden" name="productId" value="<%= product.getP_id()%>">
 					<img src="images/<%= product.getP_image() %>">
 					<div class="name"><%= product.getP_name() %></div>
 					<div class="price">Rs<%= product.getP_price() %> /-</div>
-					<input type="number" min="1" name="product_quantity" value="1" max="<%= product.getP_quantity() %>" class="qty">
+					<input type="number" min="1" name="quantity" value="1" max="<%= product.getP_quantity() %>" class="qty">
 					<input type="submit" value="add to cart" name="add-to cart" class="btn">
+					</form>
 				</div>
 		
 		<% 		

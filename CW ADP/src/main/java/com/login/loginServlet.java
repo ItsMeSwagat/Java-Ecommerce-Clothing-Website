@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.*;
 
 import com.connection.DatabaseConnection;
-import com.register.UserDao;
-import com.register.user;
 
 /**
  * Servlet implementation class loginServlet

@@ -249,6 +249,10 @@ html{
     color: var(--purple);
 }
 
+.header .header-2 .flex .icons a img:hover{
+	filter: invert(51%) sepia(86%) saturate(397%) hue-rotate(136deg) brightness(90%) contrast(94%);
+}
+
 #menu-btn{
     display: none;
 }
@@ -710,11 +714,12 @@ html{
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(25rem,1fr));
     gap: 3rem;
-    
+    border-top: var(--border);  
 }
 
 .footer .box-container .box{
 	margin-left: 5rem;
+	
 }
 
 .footer .box-container .box h3{

@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page import="com.register.*" %>
+    <%@ page import="com.cart.Cart" %>
+    <jsp:useBean id="cart" class="com.cart.Cart" scope="session" />
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
+    <% int NoOfItems = cart.getNumberOfItems();%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +43,7 @@
                 <nav class="navbar">
                     <a href="index.jsp">Home</a>
                     <a href="shop.jsp">Shop</a>
-                    <a href="cart.jsp">Cart</a>
+       
                     <a href="">Orders</a>
                 </nav>
 
@@ -55,7 +59,21 @@
                     %>
                     <a href="updateProfile.jsp?uemail=<%=u.getEmail() %>" id="user-btn"><img src="images/user.png" style="width: 2.4rem; height: 2.4rem;"></a>
                     </c:if>
-                    <a href="cart.jsp"><i class="fas fa-shopping-cart"></i></a>
+                    
+                    <%
+                    String email = (String) session.getAttribute("email");
+                    if(email == null) 
+                    {
+                    %>
+                    <a href="login.jsp"><i class="fas fa-shopping-cart"></i></a>
+                    <%
+                    }
+                    else{
+                    %>
+                     <a href="cart.jsp"><i class="fas fa-shopping-cart"></i>(<%= NoOfItems%>)</a>
+                    <%
+                    }
+                    %>
                 </div>
             </div>
         </div>

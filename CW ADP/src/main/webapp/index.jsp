@@ -4,20 +4,13 @@
 <%@ page import="com.productOperation.*" %>
 <%@ page import="java.util.List" %>
     
-<% 
-	String name = (String) session.getAttribute("name");
-	if(session.getAttribute("name")== null){
-		
-	}
-	else{
-		session.removeAttribute("name");
-	}
-	
+<% 	
+	String user = (String)session.getAttribute("email");
 	if(session.getAttribute("current_user") != null){
 		int isAdmin = (int) session.getAttribute("current_user");
 		if (isAdmin == 1){
 			
-			session.setAttribute("credential", "You are Admin!! No access to home page.");
+			session.setAttribute("credential", "You are Admin!! No access to this page");
 			response.sendRedirect("admin.jsp");
 			return;
 		}
@@ -64,8 +57,23 @@
 					<img src="images/<%= product.getP_image() %>">
 					<div class="name"><%= product.getP_name() %></div>
 					<div class="price">Rs<%= product.getP_price() %> /-</div>
-					<input type="number" min="1" name="product_quantity" value="1" max="<%= product.getP_quantity() %>" class="qty">
-					<input type="submit" value="add to cart" name="add-to cart" class="btn">
+					<form method="post" action="AddToCart">
+					<input type="hidden" name="productId" value="<%= product.getP_id()%>">
+					<input type="number" min="1" name="quantity" value="1" max="<%= product.getP_quantity() %>" class="qty">
+					<%
+					if(user == null){
+						
+					%>
+					<a href="login.jsp" class="btn">add to cart</a>
+					<%
+					}
+					else{
+					%>	
+					<input type="submit" name="add to cart" value="add to cart" class="btn"> 
+					<% 	
+					}
+					%>
+					</form>
 				</div>
 		 <%
         }
