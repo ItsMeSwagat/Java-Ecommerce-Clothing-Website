@@ -38,10 +38,10 @@
                 <div class="input-box">
                     <span>Address :</span>
                     <input type="text" name="updateAddress" placeholder="Enter your Address"  class="box" value="<%= u.getAddress()%>">
-                    <span>New Password :</span>
+                    <span>Change Password :</span>
                     <input type="password" name="updatePassword" placeholder="Enter new password"  class="box" value="<%= u.getPassword()%>">
-                    <span>Pic :</span>          
-                    <input type="file" accept="image/jpg, image/jpeg, image/png" class="box" name="updateImage" value="<%= u.getImage() %>">
+                    <span>Change Pic :</span>          
+                    <input type="file" accept="image/jpg, image/jpeg, image/png" class="box" name="updateImage" value="<%= u.getImage() %>" required>
                 </div>
             </div>
             <input type="submit" value="update profile" name="update_profile" class="btn">
