@@ -48,10 +48,18 @@ public class updateProfile extends HttpServlet {
         String password = request.getParameter("updatePassword");
 
         Part part = request.getPart("updateImage");
-        String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-        InputStream fileContent = part.getInputStream();
-        Files.copy(fileContent, Paths.get(getServletContext().getRealPath("/images"), fileName),
-               StandardCopyOption.REPLACE_EXISTING);
+        String fileName = null;
+        InputStream fileContent = null;
+        
+        if (part != null && part.getSize() > 0) { // check if the image is uploaded
+        	fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+            fileContent = part.getInputStream();
+            Files.copy(fileContent, Paths.get(getServletContext().getRealPath("/images"), fileName),
+                   StandardCopyOption.REPLACE_EXISTING);
+        } else { // if the image is not uploaded, use the current image value
+        	fileName = request.getParameter("current_image");
+        }
+        
         
         
         try {

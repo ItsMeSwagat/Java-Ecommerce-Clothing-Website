@@ -27,6 +27,7 @@
             <div class="flex">
                 <div class="input-box">
                 	<input type="hidden" name="old_email" value="<%= u.getEmail()%>">
+                	<input type="hidden" name="current_image" value="<%= u.getImage()%>">
                     <span>Name :</span>
                     <input type="text" name="updateName" placeholder="Enter your Name" class="box" value="<%= u.getName()%>">
                     <span>Email :</span>
@@ -41,7 +42,7 @@
                     <span>Change Password :</span>
                     <input type="password" name="updatePassword" placeholder="Enter new password"  class="box" value="<%= u.getPassword()%>">
                     <span>Change Pic :</span>          
-                    <input type="file" accept="image/jpg, image/jpeg, image/png" class="box" name="updateImage" value="<%= u.getImage() %>" required>
+                    <input type="file" accept="image/jpg, image/jpeg, image/png" class="box" name="updateImage">
                 </div>
             </div>
             <input type="submit" value="update profile" name="update_profile" class="btn">

@@ -374,6 +374,33 @@ html{
 
 
 /*shop */
+
+.search-form{
+	max-width: 950px;
+	margin: 2rem auto;
+	display: block;
+}
+
+
+.search-form form{
+	margin: 0 auto;
+	display: flex;
+	gap: .5rem;
+	justify-content: center;
+}
+
+.search-form .box{
+	width: 80%;
+	border: var(--border);
+	font-size: 2rem;
+	padding: 1.2rem 1.4rem;
+}
+
+.search-form .btn{
+	font-size: 2rem;
+	margin-bottom: .9rem;
+}
+
 .products-c .box-container-c{
 	max-width: 1200px;
 	margin: 2rem auto;
@@ -583,11 +610,41 @@ html{
 	justify-content: center;
 }
 
+/* cart end*/
+
+/* Order start */
+
+.placed-orders .box-container{
+	max-width: 1200px;
+	margin: 2rem auto;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 1.5rem;
+}
+
+.placed-orders .box-container .box{
+	flex: 1 1 40rem;
+	border-radius: .5rem;
+	padding: 2rem;
+	border: var(--border);
+	background-color: var(--light-bg);
+	padding: 1rem 2rem;
+}
+
+.placed-orders .box-container .box p{
+	padding: 1rem 0;
+	font-size: 2rem;
+	color: var(--light-color);
+}
+
+.placed-orders .box-container .box p span{
+	color: var(--purple);
+}
 
 
 
-
-
+.placed-orders .box-container .box
 
 
 

@@ -34,13 +34,23 @@ if(session.getAttribute("current_user") != null){
 </head>
 <body>
 	<%@include file= "navbar.jsp" %>
-	<section class="shop">
+	
 	
 		<div class="heading">
 			<h3>shop</h3>
 			<p><a href="index.jsp">home</a>/shop</p>
 		</div>
 	
+	<section class="search-form">
+		<form action="" method="post">
+			<input type="text" name="search" placeholder="search products..." class="box">
+			<input type="submit" name="submit" value="search" class="btn">
+		
+		</form>
+	
+	
+	
+	</section>
 		
 		
 		
@@ -114,8 +124,6 @@ if(session.getAttribute("current_user") != null){
     	%>
 				
 		</div>
-	</section>
-	
 	</section>
 	<%@include file="footer.jsp"%>
 </body>

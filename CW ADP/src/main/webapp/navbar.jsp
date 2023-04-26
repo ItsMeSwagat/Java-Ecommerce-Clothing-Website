@@ -32,7 +32,11 @@
                     <a href="#" class="fab fa-instagram"></a>
                     <a href="#" class="fab fa-linkedin"></a>
                 </div>
+                <%
+                if (session.getAttribute("email") == null){
+                %>
                 <p><a href="login.jsp">Login</a> | <a href="register.jsp">Register</a></p>
+                <%} %>
             </div>
         </div>
 
