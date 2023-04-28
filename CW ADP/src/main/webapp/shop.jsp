@@ -26,11 +26,10 @@ if(session.getAttribute("current_user") != null){
 <head>
 <meta charset="ISO-8859-1">
 <title>shop</title>
-	 <!-- Font awesome link-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+	
     <!--css link-->
     <link rel="stylesheet" href="css/style.css">
+    
 </head>
 <body>
 	<%@include file= "navbar.jsp" %>
@@ -40,39 +39,59 @@ if(session.getAttribute("current_user") != null){
 			<h3>shop</h3>
 			<p><a href="index.jsp">home</a>/shop</p>
 		</div>
-	
+	<%
+		ProductDao productDao = new ProductDao();
+		List<product> productList;
+   		
+		%>
 	<section class="search-form">
-		<form action="" method="post">
+		<form action="searchProduct" method="post">
 			<input type="text" name="search" placeholder="search products..." class="box">
 			<input type="submit" name="submit" value="search" class="btn">
-		
 		</form>
-	
-	
-	
 	</section>
 		
 		
 		
 	<section class="products-c">
 		<div class="box-container-c">
-		<%
-		ProductDao productDao = new ProductDao();
-		List<product> productList;
-   		
-		%>
+		
 			<div class="box-c">
 				<p>Categories</p>
 				<div class="categories"><a href="shop.jsp?category=all">All Products</a></div>
 				<div class="categories"><a href="shop.jsp?category=Men">Mens Wear</a></div>
 				<div class="categories"><a href="shop.jsp?category=Women">Womens Wear</a></div>
 				<div class="categories"><a href="shop.jsp?category=children">Children Wear</a></div>
+				<div class="categories"><a href="shop.jsp?category=Highest_price">Highest Price</a></div>
 			</div>
 		</div>
 		
 		
 		
 		<div class="box-container">
+		
+			<%
+				productList = (List<product>)request.getAttribute("productList");
+				if(productList != null && !productList.isEmpty()) {
+		   	 	for(product product : productList) {
+			%>
+			<div class="box">
+				<form method="post" action="AddToCart">
+						<input type="hidden" name="productId" value="<%= product.getP_id()%>">
+						<img src="images/<%= product.getP_image() %>">
+						<div class="name"><%= product.getP_name() %></div>
+						<div class="price">Rs<%= product.getP_price() %> /-</div>
+						<input type="number" min="1" name="quantity" value="1" max="<%= product.getP_quantity() %>" class="qty">
+						<input type="submit" value="add to cart" name="add-to cart" class="btn">
+				</form>
+			</div>
+	
+			<%
+			}
+				}
+		   	 %>
+		
+		
 		<%
 		
 		String p_category = request.getParameter("category");
@@ -93,11 +112,26 @@ if(session.getAttribute("current_user") != null){
 				</div>
 			
 		<%
-		} 
+			}
+		}
+		else if(p_category.trim().equals("Highest_price"))
+		{
+			productList = productDao.getAllProductsSortedByPrice();
+			for (product product : productList){
 		%>	
-			
+			<div class="box">
+					<form method="post" action="AddToCart">
+					<input type="hidden" name="productId" value="<%= product.getP_id()%>">
+					<img src="images/<%= product.getP_image() %>">
+					<div class="name"><%= product.getP_name() %></div>
+					<div class="price">Rs<%= product.getP_price() %> /-</div>
+					<input type="number" min="1" name="quantity" value="1" max="<%= product.getP_quantity() %>" class="qty">
+					<input type="submit" value="add to cart" name="add-to cart" class="btn">
+					</form>
+				</div>
 			
 		<% 
+			}
 		}
 		else{
 			productList = productDao.getProductByCategory(p_category);
@@ -114,13 +148,10 @@ if(session.getAttribute("current_user") != null){
 					</form>
 				</div>
 		
-		<% 		
+		<%
 			}
 	
 		}
-		
-		
-      
     	%>
 				
 		</div>

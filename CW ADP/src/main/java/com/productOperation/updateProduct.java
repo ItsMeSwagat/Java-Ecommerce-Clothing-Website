@@ -45,10 +45,18 @@ public class updateProduct extends HttpServlet {
         String p_category = request.getParameter("u_category");
 
         Part part = request.getPart("u_image");
-        String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-        InputStream fileContent = part.getInputStream();
-        Files.copy(fileContent, Paths.get(getServletContext().getRealPath("/images"), fileName),
-               StandardCopyOption.REPLACE_EXISTING);
+        String fileName = null;
+        InputStream fileContent = null;
+        
+        if (part != null && part.getSize() > 0) {
+	        fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+	        fileContent = part.getInputStream();
+	        Files.copy(fileContent, Paths.get(getServletContext().getRealPath("/images"), fileName),
+	               StandardCopyOption.REPLACE_EXISTING);
+        }
+        else {
+        	fileName = request.getParameter("c_image");
+        }
 
         try {
             Connection con = DatabaseConnection.getConnection();

@@ -6,9 +6,6 @@
 <meta charset="ISO-8859-1">
 <title>footer</title>
 
-<!-- Font awesome link-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <!--css link-->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -31,16 +28,16 @@
 
         <div class="box">
             <h3>contact info</h3>
-            <p><i class="fas fa-phone"></i>+9779746899082</p>
-            <p><i class="fas fa-phone"></i>+9779800962010</p>
-            <p><i class="fas fa-envelope"></i>shopify@gmail.com</p>
+            <p><img class="icon" src="images/phone-call.png" style="width: 2.2rem; height: 2.2rem;">+9779746899082</p>
+            <p><img class="icon" src="images/phone-call.png" style="width: 2.2rem; height: 2.2rem;">+9779800962010</p>
+            <p><img class="icon" src="images/envelope.png" style="width: 2.2rem; height: 2.2rem;">shopify@gmail.com</p>
         </div>
 
         <div class="box">
         	<h3>follows us</h3>
-            <a href="#"><i class="fab fa-facebook-f"></i>facebook</a>
-            <a href="#"><i class="fab fa-twitter"></i>twitter</a>
-            <a href="#"><i class="fab fa-instagram"></i>instagram</a>
+            <a href="#"><img class="icon" src="images/facebook.png" style="width: 2.2rem; height: 2.2rem;">facebook</a>
+            <a href="#"><img class="icon" src="images/twitter.png" style="width: 2.2rem; height: 2.2rem;">twitter</a>
+            <a href="#"><img class="icon" src="images/instagram.png" style="width: 2.2rem; height: 2.2rem;">instagram</a>
         </div>
     </div>
 

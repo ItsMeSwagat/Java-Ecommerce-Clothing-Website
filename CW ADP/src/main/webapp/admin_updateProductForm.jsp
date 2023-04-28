@@ -44,6 +44,7 @@
 	%>
     <form action="updateProduct" method="post" enctype="multipart/form-data">
         <input type="hidden" name="u_p_id" value="<%=product.getP_id()%>">
+        <input type="hidden" name="c_image" value="<%=product.getP_image()%>">
         <img src="images/<%=product.getP_image()%>">
         
         <input type="text" name="u_name" value="<%=product.getP_name() %>" class="box" placeholder="enter product name">

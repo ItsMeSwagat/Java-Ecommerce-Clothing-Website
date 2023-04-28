@@ -102,6 +102,67 @@ public class ProductDao {
 
         return productList;
     }
+    
+    public List<product> searchProductsByName(String p_name) {
+        List<product> productList = new ArrayList<product>();
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM product WHERE p_name LIKE ?");
+            preparedStatement.setString(1, "%" + p_name + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                product product = new product();
+                product.setP_id(resultSet.getInt("p_id"));
+                product.setP_name(resultSet.getString("p_name"));
+                product.setP_price(resultSet.getInt("p_price"));
+                product.setP_quantity(resultSet.getInt("p_quantity"));
+                product.setP_category(resultSet.getString("p_category"));
+                product.setP_image(resultSet.getString("p_image"));
+                productList.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return productList;
+    }
+
+    
+    public List<product> getAllProductsSortedByPrice() {
+        List<product> productList = new ArrayList<product>();
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement("SELECT * FROM product ORDER BY p_price DESC");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                product product = new product();
+                product.setP_id(resultSet.getInt("p_id"));
+                product.setP_name(resultSet.getString("p_name"));
+                product.setP_price(resultSet.getInt("p_price"));
+                product.setP_quantity(resultSet.getInt("p_quantity"));
+                product.setP_category(resultSet.getString("p_category"));
+                product.setP_image(resultSet.getString("p_image"));
+                productList.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return productList;
+    }
+    
+    
+    // Get total number of products
+    public int getTotalProducts() {
+        int totalProducts = 0;
+        try {
+            String query = "SELECT COUNT(*) FROM product";
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalProducts = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalProducts;
+    }
 
     
 

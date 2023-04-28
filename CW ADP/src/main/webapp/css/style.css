@@ -25,24 +25,7 @@
     transition: all .2s linear;
 }
 
-/* *::selection{
-    background-color: var(--purple);
-    color: var(--white);
-}
 
-*::-webkit-scrollbar{
-    height: .5rem;
-    width: 1rem;
-}
-
-*::-webkit-scrollbar-track{
-    background-color: transparent;
-}
-
-*::-webkit-scrollbar-thumb{
-    background-color: var(--purple);
-}
-*/
 html{
     font-size: 60.5%;
     overflow-x: hidden;
@@ -195,10 +178,14 @@ html{
     position: relative;
 }
 
-.header .header-1 .flex .share a{
+.header .header-1 .flex .share a img{
     font-size: 2.5rem;
     margin-right: 1.5rem;
     color: var(--black);
+}
+
+.header .header-1 .flex .share a img:hover{
+	filter: invert(51%) sepia(86%) saturate(397%) hue-rotate(136deg) brightness(90%) contrast(94%);
 }
 
 .header .header-1 .flex .share a:hover{
@@ -244,9 +231,8 @@ html{
     margin-left: 1.5rem;
 }
 
-
-.header .header-2 .flex .icons > *:hover{
-    color: var(--purple);
+.header .header-2 .flex .icons #menu-btn img:hover{
+	filter: invert(51%) sepia(86%) saturate(397%) hue-rotate(136deg) brightness(90%) contrast(94%);
 }
 
 .header .header-2 .flex .icons a img:hover{
@@ -375,37 +361,78 @@ html{
 
 /*shop */
 
-.search-form{
+.search-form form{
 	max-width: 950px;
 	margin: 2rem auto;
-	display: block;
-}
-
-
-.search-form form{
-	margin: 0 auto;
 	display: flex;
 	gap: .5rem;
 	justify-content: center;
 }
 
-.search-form .box{
+.search-form form .box{
 	width: 80%;
 	border: var(--border);
 	font-size: 2rem;
 	padding: 1.2rem 1.4rem;
 }
 
-.search-form .btn{
+.search-form form .btn{
+	margin-top: 0;
+}
+
+.search-form .box-container{
+	max-width: 1200px;
+	margin: 2rem auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 30rem);
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.search-form .box-container .box{
+	border-radius: .5rem;
+	background-color: var(--white);
+	box-shadow: var(--box-shadow);
+	padding: 2rem;
+	text-align: center;
+	border: var(--border);
+	position: relative;
+}
+
+.search-form .box-container .box img{
+	height: 25rem;
+}
+
+.search-form .box-container .box .name{
+	padding: 1rem 0;
 	font-size: 2rem;
-	margin-bottom: .9rem;
+	color: var(--black);
+}
+
+.search-form .box-container .box .qty{
+	width: 100%;
+	padding: 1.2rem 1.4rem;
+	border-radius: .5rem;
+	border: var(--border);
+	margin: 1rem 0;
+	font-size: 1.8rem;
+}
+
+.search-form .box-container .box .price{
+	position: absolute;
+	top: 1rem; left: 1rem;
+	border-radius: .5rem;
+	padding: 1rem;
+	font-size: 2rem;
+	color: var(--white);
+	background-color: var(--red);
 }
 
 .products-c .box-container-c{
 	max-width: 1200px;
 	margin: 2rem auto;
     display: grid;
-    gap: 1.5rem;
+    gap: 1rem;
     justify-content: center;
 }
 
@@ -423,7 +450,7 @@ html{
 .products-c .box-c p{
 	padding: 1rem 1rem;
 	align-items: center;
-	font-size: 3rem;
+	font-size: 2.5rem;
 	border: var(--border);
 	
 }
@@ -432,7 +459,7 @@ html{
 	padding-left: .5rem;
 	padding: 1rem 1rem;
 	display: block;
-	font-size: 2.5rem;
+	font-size: 2rem;
 	
 }
 
@@ -611,6 +638,81 @@ html{
 }
 
 /* cart end*/
+
+/*checkout page */
+
+.display-order{
+	max-width: 1200px;
+	margin: 2rem auto;
+	text-align: center;
+	padding-bottom: 0;
+}
+
+.display-order p{
+	background-color: var(--light-bg);
+	color: var(--black);
+	font-size: 2rem;
+	padding: 1rem 1.5rem;
+	border: var(--border);
+	display: inline-block;
+	margin: .5rem;
+}
+
+.display-order p span{
+	color: var(--red);
+}
+
+.display-order .grand-total{
+	margin-top: 2rem;
+	font-size: 2.5rem;
+	color: var(--light-color);
+}
+
+.display-order .grand-total span{
+	color: var(--red);
+}
+
+.checkout form{
+	max-width: 1200px;
+	padding: 2rem;
+	margin: 2rem auto;
+	border: var(--border);
+	background-color: var(--light-bg);
+	border-radius: .5rem;
+}
+
+.checkout form h3{
+	text-align: center;
+	margin-bottom: 2rem;
+	color: var(--black);
+	text-transform: uppercase;
+	font-size: 3rem;
+}
+
+.checkout form .flex{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+}
+
+.checkout form .flex .input-box{
+	flex: 1 1 40rem;
+}
+
+.checkout form .flex span{
+	font-size: 2rem;
+	color: var(--black);
+}
+
+.checkout form .flex select,
+.checkout form .flex input{
+	width :100%;
+	border-radius: .5rem;
+	border: var(--border);
+	background-color: var(--white);
+	padding: 1.2rem 1.4rem;
+	font-size: 1.8rem;
+}
 
 /* Order start */
 
@@ -860,8 +962,11 @@ html{
 	.home .content h3{
 		font-size: 3.5rem;
 	}
-	.products-c  .box-c{
-    	display: block;
+	.products-c  .box-c .categories{
+    	font-size: 1.3rem;
+    }
+    .products-c  .box-c p{
+    	font-size: 1.5rem;
     }
 }
 

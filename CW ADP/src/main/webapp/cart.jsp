@@ -88,7 +88,7 @@ if(session.getAttribute("current_user") != null){
 			<p>grand total : <span>Rs ${grandTotal} /-</span></p>
 			<div class="flex">
 				<a href="shop.jsp" class="option-btn">continue shopping</a>
-				<a href="" class="btn">proceed to checkout</a>
+				<a href="checkout.jsp" class="btn">proceed to checkout</a>
 			</div>
 		</div>
 	</section>

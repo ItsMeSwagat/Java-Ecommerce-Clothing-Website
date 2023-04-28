@@ -59,4 +59,23 @@ public class UserDao {
         }
         return flag;
     }
+    
+ // Get total number of users
+    public int getTotalUsers() throws SQLException {
+        int totalUsers = 0;
+        try {
+            String query = "SELECT COUNT(*) FROM user";
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalUsers = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return totalUsers;
+    }
 }
+
+	

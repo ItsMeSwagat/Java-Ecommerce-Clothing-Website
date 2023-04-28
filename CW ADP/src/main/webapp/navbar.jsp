@@ -14,9 +14,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Header</title>
 
-    <!-- Font awesome link-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <!--css link-->
     <link rel="stylesheet" href="css/style.css">
 
@@ -27,10 +24,9 @@
         <div class="header-1">
             <div class="flex">
                 <div class="share">
-                    <a href="#" class="fab fa-facebook"></a>
-                    <a href="#" class="fab fa-twitter"></a>
-                    <a href="#" class="fab fa-instagram"></a>
-                    <a href="#" class="fab fa-linkedin"></a>
+                    <a href="#"><img class="icon" src="images/facebook.png" style="width: 2.5rem; height: 2.5rem;"></a>
+                    <a href="#"><img class="icon" src="images/twitter.png" style="width: 2.5rem; height: 2.5rem;"></a>
+                    <a href="#"><img class="icon" src="images/instagram.png" style="width: 2.5rem; height: 2.5rem;"></a>
                 </div>
                 <%
                 if (session.getAttribute("email") == null){
@@ -47,13 +43,12 @@
                 <nav class="navbar">
                     <a href="index.jsp">Home</a>
                     <a href="shop.jsp">Shop</a>
-       
-                    <a href="">Orders</a>
+                    <a href="Order.jsp">Orders</a>
                 </nav>
 
                 <div class="icons">
-                    <div id="menu-btn" class="fas fa-bars"></div>
-                    <a href=""><img class="icon" src="images/search.png" style="width: 2.4rem; height: 2.4rem;"></a>
+                    <div id="menu-btn"><img class="icon" src="images/menu.png" style="width: 2.4rem; height: 2.4rem;"></div>
+                    <a href="shop.jsp"><img class="icon" src="images/search.png" style="width: 2.4rem; height: 2.4rem;"></a>
                     <c:if test="${not empty sessionScope.email}">
                     <%
                     String email = (String) session.getAttribute("email");           
@@ -69,12 +64,12 @@
                     if(email == null) 
                     {
                     %>
-                    <a href="login.jsp"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="login.jsp"><img class="icon" src="images/grocery-store.png" style="width: 2.5rem; height: 2.5rem;"></a>
                     <%
                     }
                     else{
                     %>
-                     <a href="cart.jsp"><i class="fas fa-shopping-cart"></i>(<%= NoOfItems%>)</a>
+                     <a href="cart.jsp"><img class="icon" src="images/grocery-store.png" style="width: 2.5rem; height: 2.5rem;">(<%= NoOfItems%>)</a>
                     <%
                     }
                     %>

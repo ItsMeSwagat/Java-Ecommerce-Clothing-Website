@@ -24,6 +24,8 @@ else{
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="com.productOperation.*" %>
+<%@ page import="com.register.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,20 +74,27 @@ else{
 <section class="dashboard">
 
     <!--<h1 class="title">dashboard</h1> -->
-    
+    <%
+    	UserDao userDao = new UserDao();
+      	int totalUser = userDao.getTotalUsers();
+    %>
     <div class="box-container">
         <div class="box">
-            <h3>0</h3>
+            <h3><%=totalUser%></h3>
             <p>Total Users</p>
         </div>
 
+	
         <div class="box">
             <h3>0</h3>
             <p>Order Placed</p>
         </div>
-
+	<%
+		ProductDao productDao = new ProductDao();
+    	int totalProducts = productDao.getTotalProducts();
+	%>
         <div class="box">
-            <h3>0</h3>
+            <h3><%=totalProducts%></h3>
             <p>Products added</p>
         </div>
 
