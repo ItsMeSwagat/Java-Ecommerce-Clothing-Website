@@ -39,7 +39,7 @@
 	
 	<div class="content">
 		<h3>Get the clothes at the greatest Quality.</h3>
-		<p>lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsum lorem ipsum</p>
+		<p>Looking for stylish and comfortable clothes? Check out our collection at the clothing store!</p>
 		<a href="shop.jsp" class="white-btn">discover more</a>
 	</div>
 	

@@ -92,12 +92,16 @@ else{
 			<p>grand total : <span>Rs ${grandTotal} /-</span></p>
 			<div class="flex">
 				<a href="shop.jsp" class="option-btn">continue shopping</a>
-				<%
-				 if(c != null || c.getItems().isEmpty() == false){
+				<c:choose>
+    				<c:when test="${empty cart or empty cart.items}">
+        				<a href="checkout.jsp" class="btn" style="pointer-events: none;">proceed to checkout</a>
+    				</c:when>
+    				<c:otherwise>
+        				<a href="checkout.jsp" class="btn">proceed to checkout</a>
+    				</c:otherwise>
+				</c:choose>
+
 				
-				%>
-				<a href="checkout.jsp" class="btn">proceed to checkout</a>
-				<%} %>
 			</div>
 		</div>
 	</section>

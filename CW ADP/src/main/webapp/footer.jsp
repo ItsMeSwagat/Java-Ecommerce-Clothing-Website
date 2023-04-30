@@ -15,9 +15,9 @@
         <div class="box">
             <h3>quick links</h3>
             <a href="index.jsp">Home</a>
-            <a href="product.jsp">Product</a>
+            <a href="shop.jsp">Shop</a>
             <a href="cart.jsp">Cart</a>
-            <a href="order.jsp">Order</a>
+            <a href="Order.jsp">Order</a>
         </div>
 
         <div class="box">

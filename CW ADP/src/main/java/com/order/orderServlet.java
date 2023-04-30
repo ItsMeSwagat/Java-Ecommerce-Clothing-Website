@@ -43,7 +43,7 @@ public class orderServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			
 			Cart c = (Cart) session.getAttribute("cart");
-			if(c != null) {
+			if(session.getAttribute("cart") != null) {
 		        List<CartItem> olist = c.getItems();
 		        
 		        orderDao orderDao = new orderDao();
