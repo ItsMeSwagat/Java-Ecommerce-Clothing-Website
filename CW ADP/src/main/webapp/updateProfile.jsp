@@ -1,7 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.register.*" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+    
+    <%
+if(session.getAttribute("current_user") != null){
+	int isAdmin = (int) session.getAttribute("current_user");
+	if (isAdmin == 1){
+		
+		session.setAttribute("credential", "You are Admin!! No access to this page");
+		response.sendRedirect("admin.jsp");
+		return;
+	}
+}
+else{
+	session.setAttribute("credential","Please login first!!");
+	response.sendRedirect("login.jsp");
+}
+
+
+%> 
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>

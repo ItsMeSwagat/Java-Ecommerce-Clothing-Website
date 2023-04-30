@@ -16,6 +16,10 @@ if(session.getAttribute("current_user") != null){
 		return;
 	}
 }
+else{
+	session.setAttribute("credential","Please login first!!");
+	response.sendRedirect("login.jsp");
+}
 
 
 %>    
@@ -88,7 +92,12 @@ if(session.getAttribute("current_user") != null){
 			<p>grand total : <span>Rs ${grandTotal} /-</span></p>
 			<div class="flex">
 				<a href="shop.jsp" class="option-btn">continue shopping</a>
+				<%
+				 if(c != null || c.getItems().isEmpty() == false){
+				
+				%>
 				<a href="checkout.jsp" class="btn">proceed to checkout</a>
+				<%} %>
 			</div>
 		</div>
 	</section>

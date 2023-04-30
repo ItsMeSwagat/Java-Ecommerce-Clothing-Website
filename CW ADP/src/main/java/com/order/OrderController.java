@@ -4,11 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.connection.DatabaseConnection;
 import com.productOperation.product;
-import com.register.user;
+import com.register.*;
 
 public class OrderController {
 	final private static boolean OP_SUCCESS = true;
@@ -31,12 +32,12 @@ public class OrderController {
 			final String allOrdersQuery = "SELECT * FROM orders;";
 			PreparedStatement allOrdersStmt = con.prepareStatement(allOrdersQuery);
 			ResultSet allOrdersResultSet = allOrdersStmt.executeQuery();
-			
+			UserDao userDao = new UserDao();
 			while (allOrdersResultSet.next()) {
 				int orderId = allOrdersResultSet.getInt("orders.id");
 				String date = allOrdersResultSet.getDate("date").toString();
 				float total = allOrdersResultSet.getFloat("order_total");
-				user user = UserController.fetchUserInfo(allOrdersResultSet.getInt("customer"));
+				user user = userDao.getUserByEmail(allOrdersResultSet.getString("c_email"));
 				
 				ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
 				String orderDetailQuery = "SELECT * FROM orders "
@@ -48,31 +49,28 @@ public class OrderController {
 				ResultSet orderDetailResultSet = orderDetailStmt.executeQuery();
 				
 				while(orderDetailResultSet.next()) {
-					int id = orderDetailResultSet.getInt("product.id");
-					String name = orderDetailResultSet.getString("product.name");
-					String brand = orderDetailResultSet.getString("product.brand");
-					String category = orderDetailResultSet.getString("product.category");
-					String description = orderDetailResultSet.getString("product.description");
-					int stock = orderDetailResultSet.getInt("product.stock");
-					float price = orderDetailResultSet.getFloat("product.price");
-					int rating = orderDetailResultSet.getInt("product.rating");
+					int id = orderDetailResultSet.getInt("product.p_id");
+					String name = orderDetailResultSet.getString("product.p_name");
+					int price = orderDetailResultSet.getInt("product.p_price");
+					String category = orderDetailResultSet.getString("product.p_category");
+					String image = orderDetailResultSet.getString("product.p_iamge");
 					int quantity = orderDetailResultSet.getInt("order_product.quantity");
 					
-					product product = new product(id, name, price, brand, category, description, stock, rating);
+					product product = new product(id, name, price, quantity, image, category);
 					OrderItem orderItem = new OrderItem(product, quantity);
 					orderItems.add(orderItem);
 				}
 				orderDetailResultSet.close();
 				orderDetailStmt.close();
 				
-				order order = new order(order_id, total, date, user, orderItems);
+				order order = new order();
 				orders.add(order);
 			}
 			allOrdersResultSet.close();
 			allOrdersStmt.close();
 			con.close();
 			return OP_SUCCESS;
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return OP_FAILED;
 		}
@@ -80,7 +78,7 @@ public class OrderController {
 
 	public static boolean createOrder(int userId, ArrayList<OrderItem> currentCart) {
 		try {
-			Connection con = DatabaseConnection.connectDB();
+			Connection con = DatabaseConnection.getConnection();
 			float orderTotal = OrderItemController.calculateCartTotal(currentCart);
 			String orderInsertQuery = "INSERT INTO orders(order_total, customer) VALUES (?, ?)";
 			PreparedStatement orderInsertStmt = con.prepareStatement(orderInsertQuery, Statement.RETURN_GENERATED_KEYS);
@@ -96,7 +94,7 @@ public class OrderController {
 
 			for (OrderItem item : currentCart) {
 				String orderDetailQuery = "INSERT INTO order_product VALUES (?,?,?)";
-				int productId = item.getProduct().getId();
+				int productId = item.getProduct().getP_id();
 				int productQty = item.getQuantity();
 				PreparedStatement orderDetailStmt = con.prepareStatement(orderDetailQuery);
 				orderDetailStmt.setInt(1, orderId);

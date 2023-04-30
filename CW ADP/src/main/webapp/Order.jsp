@@ -1,5 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="com.order.*" %>
+<%@ page import="com.cart.*" %>
+<%@ page import="com.register.*" %>
+<%@ page import="java.util.List" %>    
+<%    
+if(session.getAttribute("current_user") != null){
+	int isAdmin = (int) session.getAttribute("current_user");
+	if (isAdmin == 1){
+		
+		session.setAttribute("credential", "You are Admin!! No access to this page");
+		response.sendRedirect("admin.jsp");
+		return;
+	}
+}
+else{
+	session.setAttribute("credential","Please login first!!");
+	response.sendRedirect("login.jsp");
+}
+%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,45 +37,39 @@
 		<p><a href="index.jsp">home</a>/order</p>
 	</div>
 	
+	
+	<%
+	String uemail = (String) session.getAttribute("email");           
+    UserDao userDao = new UserDao();
+    user u = userDao.getUserByEmail(uemail);
+    orderDao orderDao = new orderDao();
+    
+    List<order> olist = orderDao.getOrder(u.getEmail());
+	%>
 	<section class="placed-orders">
 		<h1 class="title">placed orders</h1>
+		
 		<div class="box-container">
+		
+			<%
+				for(order o:olist){
+				
+				int itemTotal = o.getPrice()*o.getQuantity();
+				double totalAmount = 0.0;
+				totalAmount += itemTotal;
+			%>
+
 			<div class="box">
-				<p>placed on: <span>April 10,2023</span></p>
-				<p>Name: <span>Swagat Shrestha</span></p>
-				<p>Number: <span>9746899082</span></p>
-				<p>Email : <span>xtha.swagat69@gmail.com</span></p>
-				<p>Address : <span>Biratnagar-10, Morang</span></p>
-				<p>your orders : <span>Hoodie (2), pant(3)</span></p>
-				<p>total price : <span>Rs 2800/-</span></p>
+				<p>Order ID: <span><%=o.getOrder_id() %></span></p>
+				<p>Name: <span><%=o.getName() %></span></p>
+				<p>Number: <span><%=o.getNumber() %></span></p>
+				<p>Email : <span><%=o.getEmail() %></span></p>
+				<p>Address : <span><%=o.getFullAddress() %></span></p>
+				<p>your orders : <span><%=o.getProduct_name() %>(<%=o.getQuantity() %>)</span></p>
+				<p>price : <span>Rs <%=itemTotal %> /-</span></p>
+				<p>payment type : <span><%=o.getPayment() %></span></p>
 			</div>
-			<div class="box">
-				<p>placed on: <span>April 10,2023</span></p>
-				<p>Name: <span>Swagat Shrestha</span></p>
-				<p>Number: <span>9746899082</span></p>
-				<p>Email : <span>xtha.swagat69@gmail.com</span></p>
-				<p>Address : <span>Biratnagar-10, Morang</span></p>
-				<p>your orders : <span>Hoodie (2), pant(3)</span></p>
-				<p>total price : <span>Rs 2800/-</span></p>
-			</div>
-			<div class="box">
-				<p>placed on: <span>April 10,2023</span></p>
-				<p>Name: <span>Swagat Shrestha</span></p>
-				<p>Number: <span>9746899082</span></p>
-				<p>Email : <span>xtha.swagat69@gmail.com</span></p>
-				<p>Address : <span>Biratnagar-10, Morang</span></p>
-				<p>your orders : <span>Hoodie (2), pant(3)</span></p>
-				<p>total price : <span>Rs 2800/-</span></p>
-			</div>
-			<div class="box">
-				<p>placed on: <span>April 10,2023</span></p>
-				<p>Name: <span>Swagat Shrestha</span></p>
-				<p>Number: <span>9746899082</span></p>
-				<p>Email : <span>xtha.swagat69@gmail.com</span></p>
-				<p>Address : <span>Biratnagar-10, Morang</span></p>
-				<p>your orders : <span>Hoodie (2), pant(3)</span></p>
-				<p>total price : <span>Rs 2800/-</span></p>
-			</div>
+		<%} %>	
 		</div>
 	
 	</section>

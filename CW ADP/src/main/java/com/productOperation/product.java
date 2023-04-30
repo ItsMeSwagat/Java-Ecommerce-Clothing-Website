@@ -14,7 +14,8 @@ public class product {
 	}
 
 
-	public product(String p_name, int p_price, int p_quantity, String p_image, String p_category) {
+	public product(int p_id, String p_name, int p_price, int p_quantity, String p_image, String p_category) {
+		this.p_id = p_id;
 		this.p_name = p_name;
 		this.p_price = p_price;
 		this.p_quantity = p_quantity;

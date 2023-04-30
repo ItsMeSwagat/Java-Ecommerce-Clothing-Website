@@ -26,6 +26,7 @@ else{
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.productOperation.*" %>
 <%@ page import="com.register.*" %>
+<%@ page import="com.order.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,9 +85,13 @@ else{
             <p>Total Users</p>
         </div>
 
+	<%
+		orderDao orderDao = new orderDao();
+		int totalOrders = orderDao.getTotalOrders();
 	
+	%>
         <div class="box">
-            <h3>0</h3>
+            <h3><%=totalOrders %></h3>
             <p>Order Placed</p>
         </div>
 	<%

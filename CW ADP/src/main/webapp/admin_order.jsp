@@ -18,6 +18,11 @@ else{
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="com.order.*" %>
+<%@ page import="com.cart.*" %>
+<%@ page import="com.register.*" %>
+<%@ page import="java.util.List" %> 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,31 +65,32 @@ else{
 <!--Header Ends-->
 
 <section class="orders">
+	<%
+		orderDao orderDao = new orderDao();
+		List<order> olist = orderDao.getOrderAdmin();
+		
+		for(order o:olist){
+			
+			int itemTotal = o.getPrice()*o.getQuantity();
+			double totalAmount = 0.0;
+			totalAmount += itemTotal;	
+	%>
+	<div class="box-container">
 	
-	<div class="box-container">
+	
 		<div class="box">
-			<p>order id : <span># 001</span></p>
-			<p>placed on : <span># 001</span></p>
-			<p>name : <span># 001</span></p>
-			<p>number : <span># 001</span></p>
-			<p>email : <span># 001</span></p>
-			<p>address : <span># 001</span></p>
-			<p>total products : <span># 001</span></p>
-			<p>total price : <span># 001</span></p>
+			<p>order id : <span><%=o.getOrder_id() %></span></p>
+			<p>name : <span><%=o.getName() %></span></p>
+			<p>number : <span><%=o.getNumber() %></span></p>
+			<p>email : <span><%=o.getEmail() %></span></p>
+			<p>address : <span><%=o.getFullAddress() %></span></p>
+			<p>product : <span><%=o.getProduct_name() %>(<%=o.getQuantity() %>)</span></p>
+			<p>price : <span><%=itemTotal %></span></p>
+			<p>payment type : <span><%=o.getPayment() %></span></p>
 		</div>
+	
 	</div>
-	<div class="box-container">
-		<div class="box">
-			<p>order id : <span># 001</span></p>
-			<p>placed on : <span># 001</span></p>
-			<p>name : <span># 001</span></p>
-			<p>number : <span># 001</span></p>
-			<p>email : <span># 001</span></p>
-			<p>address : <span># 001</span></p>
-			<p>total products : <span># 001</span></p>
-			<p>total price : <span># 001</span></p>
-		</div>
-	</div>
+	<% }%>
 	
 </section>
 

@@ -26,24 +26,7 @@
     transition: all .2s linear;
 }
 
-/* *::selection{
-    background-color: var(--purple);
-    color: var(--white);
-}
 
-*::-webkit-scrollbar{
-    height: .5rem;
-    width: 1rem;
-}
-
-*::-webkit-scrollbar-track{
-    background-color: transparent;
-}
-
-*::-webkit-scrollbar-thumb{
-    background-color: var(--purple);
-}
-*/
 html{
     font-size: 62.5%;
     overflow-x: hidden;
@@ -373,7 +356,7 @@ section{
 
 .orders{
     display: grid;
-    grid-template-columns: repeat(auto-fit, 30rem);
+    grid-template-columns: repeat(auto-fit, 50rem);
     justify-content: center;
     gap: 1.5rem;
     max-width: 1200px;
