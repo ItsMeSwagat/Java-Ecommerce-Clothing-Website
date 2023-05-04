@@ -150,8 +150,8 @@ section{
     color: var(--black);
 }
 
-.header .flex .icons div:hover{
-    color: var(--purple);
+.header .flex .icons div img:hover{
+	filter: invert(51%) sepia(86%) saturate(397%) hue-rotate(136deg) brightness(90%) contrast(94%);
 }
 
 .header .flex .account-box{
@@ -354,13 +354,13 @@ section{
 
 /* Order */
 
-.orders{
+.orders .box-container{
     display: grid;
     grid-template-columns: repeat(auto-fit, 50rem);
     justify-content: center;
     gap: 1.5rem;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 1rem auto;
     align-items: flex-start;
 }
 
@@ -381,6 +381,10 @@ section{
 .orders .box-container .box p span{
 	color: var(--purple);
 	
+}
+
+.orders .box-container .box form{
+	text-align: center;
 }
 
 .orders .box-container .box form select{

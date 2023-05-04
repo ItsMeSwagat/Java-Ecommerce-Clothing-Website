@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,47 +40,93 @@ public class registerServlet extends HttpServlet {
 		InputStream fileContent = part.getInputStream();
 		Files.copy(fileContent, Paths.get(getServletContext().getRealPath("/images"), fileName), StandardCopyOption.REPLACE_EXISTING);
 		
-		
-		user u = new user();
-		u.setName(name);
-		u.setEmail(email);
-		u.setPhonenumber(phonenumber);
-		u.setAddress(address);
-		u.setPassword(password);
-		u.setImage(fileName);
-		
 		HttpSession hs = request.getSession();
 		RequestDispatcher dispatcher = null;
 		
-		try {
-		    Connection con = DatabaseConnection.getConnection();
-		    String query = "insert into user(name,email,phonenumber,address,password,image)" + "values(?,?,?,?,?,?)";;
-		    PreparedStatement pst = con.prepareStatement(query);
-		    pst.setString(1, u.getName());
-		    pst.setString(2, u.getEmail());
-		    pst.setString(3, u.getPhonenumber());
-		    pst.setString(4, u.getAddress());
-		    pst.setString(5, u.getPassword());
-		    pst.setString(6, u.getImage());
-		        	
-		    int rowCount = pst.executeUpdate();
-		    dispatcher = request.getRequestDispatcher("register.jsp");
-		    if (rowCount > 0) {
-		        hs.setAttribute("credential", "Account Registered Successfully!!");
-		        
-		    } else {
-		        hs.setAttribute("credential", "Account Registration failed!!");
-		    }
-		    dispatcher.forward(request, response);
+		// Validation
+        boolean isValid = true;
+        if (name.isEmpty()) {
+            hs.setAttribute("credential", "Please enter your name.");
+            isValid = false;
+        }
+        if (email.isEmpty()) {
+            hs.setAttribute("credential", "Please enter a valid email.");
+            isValid = false;
+        } else {
+            try {
+                Connection con = DatabaseConnection.getConnection();
+                String query = "SELECT * FROM user WHERE email=?";
+                PreparedStatement pst = con.prepareStatement(query);
+                pst.setString(1, email);
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    hs.setAttribute("credential", "Email already exists.");
+                    isValid = false;
+                }
+            } catch (Exception ex) {
+                hs.setAttribute("credential", "Something went wrong. Please try again later.");
+                dispatcher = request.getRequestDispatcher("register.jsp");
+                dispatcher.forward(request, response);
+            }
+        }
+        if (phonenumber.isEmpty() || !phonenumber.matches("\\d{10}")) {
+            hs.setAttribute("credential", "Please enter a valid phone number.");
+            isValid = false;
+        }
+        if (address.isEmpty()) {
+            hs.setAttribute("credential", "Please enter your address.");
+            isValid = false;
+        }
+        if (password.isEmpty() || password.length() < 8) {
+            hs.setAttribute("credential", "Please enter a password with minimum 8 characters.");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            dispatcher = request.getRequestDispatcher("register.jsp");
+            dispatcher.forward(request, response);
+        } else {
+        	
+        
+			user u = new user();
+			u.setName(name);
+			u.setEmail(email);
+			u.setPhonenumber(phonenumber);
+			u.setAddress(address);
+			u.setPassword(password);
+			u.setImage(fileName);
+			
 		
-		}
-		catch (Exception ex){
-			hs.setAttribute("credential", "Please enter valid email.");
-			dispatcher = request.getRequestDispatcher("register.jsp");
-		    dispatcher.forward(request, response);
 			
+			try {
+			    Connection con = DatabaseConnection.getConnection();
+			    String query = "insert into user(name,email,phonenumber,address,password,image)" + "values(?,?,?,?,?,?)";;
+			    PreparedStatement pst = con.prepareStatement(query);
+			    pst.setString(1, u.getName());
+			    pst.setString(2, u.getEmail());
+			    pst.setString(3, u.getPhonenumber());
+			    pst.setString(4, u.getAddress());
+			    pst.setString(5, u.getPassword());
+			    pst.setString(6, u.getImage());
+			        	
+			    int rowCount = pst.executeUpdate();
+			    dispatcher = request.getRequestDispatcher("register.jsp");
+			    if (rowCount > 0) {
+			        hs.setAttribute("credential", "Account Registered Successfully!!");
+			        
+			    } else {
+			        hs.setAttribute("credential", "Account Registration failed!!");
+			    }
+			    dispatcher.forward(request, response);
 			
-		}
+			}
+			catch (Exception ex){
+				hs.setAttribute("credential", "Please enter valid email.");
+				dispatcher = request.getRequestDispatcher("register.jsp");
+			    dispatcher.forward(request, response);
+					
+			}
+        }
 		
 
 	}

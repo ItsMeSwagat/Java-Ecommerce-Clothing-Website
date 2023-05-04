@@ -29,11 +29,10 @@ else{
 <meta charset="ISO-8859-1">
 <title>orders</title>
 
-<!-- Font awesome link-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <!--css link-->
     <link rel="stylesheet" href="css/admin_style.css">
+    
+    
 </head>
 <body>
 	<header class="header">
@@ -50,8 +49,8 @@ else{
         </nav>
 
         <div class="icons">
-            <div id="menu-btn" class="fas fa-bars"></div>
-            <div id="user-btn" class="fas fa-user"></div>
+            <div id="menu-btn"><img src="images/menu.png" style="width: 2.4rem; height: 2.4rem;"></div>
+            <div id="user-btn"><img src="images/user.png" style="width: 2.4rem; height: 2.4rem;"></div>
         </div>
         
         <div class="account-box">
@@ -65,7 +64,9 @@ else{
 <!--Header Ends-->
 
 <section class="orders">
-	<%
+	
+	<div class="box-container">
+		<%
 		orderDao orderDao = new orderDao();
 		List<order> olist = orderDao.getOrderAdmin();
 		
@@ -75,8 +76,6 @@ else{
 			double totalAmount = 0.0;
 			totalAmount += itemTotal;	
 	%>
-	<div class="box-container">
-	
 	
 		<div class="box">
 			<p>order id : <span><%=o.getOrder_id() %></span></p>
@@ -85,12 +84,12 @@ else{
 			<p>email : <span><%=o.getEmail() %></span></p>
 			<p>address : <span><%=o.getFullAddress() %></span></p>
 			<p>product : <span><%=o.getProduct_name() %>(<%=o.getQuantity() %>)</span></p>
-			<p>price : <span><%=itemTotal %></span></p>
+			<p>total price : <span>Rs <%=itemTotal %> /-</span></p>
 			<p>payment type : <span><%=o.getPayment() %></span></p>
 		</div>
-	
-	</div>
 	<% }%>
+	</div>
+	
 	
 </section>
 

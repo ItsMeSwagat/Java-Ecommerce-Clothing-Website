@@ -25,7 +25,7 @@
             <input type="text" name="phonenumber" placeholder="Enter your phone number*" class="box">
             <input type="text" name="address" placeholder="Enter your Address*" class="box">
             <input type="password" name="password" placeholder="Enter your password*"  class="box">            
-            <input type="file" accept="image/jpg, image/jpeg, image/png" class="box"  name="image">
+            <input type="file" accept="image/jpg, image/jpeg, image/png" class="box"  name="image" required>
             <input type="submit" name="submit" value="Register now" class="btn">
             <p>Already have an account? <a href="login.jsp">login now</a></p>
         </form>

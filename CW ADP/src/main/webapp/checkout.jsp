@@ -89,11 +89,11 @@ else{
 				</div>
 				<div class="input-box">
 					<span>city:</span>
-					<input type="text" name="city" placeholder="Eg :- Biratnagar" required>
+					<input type="text" name="city" placeholder="Eg :- Biratnagar">
 				</div>
 				<div class="input-box">
 					<span>pin code:</span>
-					<input type="number" name="pincode" placeholder="Eg :- 123124" required>
+					<input type="number" name="pincode" placeholder="Eg :- 123124">
 				</div>
 				<div class="input-box">
 					<span>province:</span>

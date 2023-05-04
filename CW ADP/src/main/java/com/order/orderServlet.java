@@ -42,6 +42,22 @@ public class orderServlet extends HttpServlet {
 			
 			HttpSession session = request.getSession();
 			
+			if (name == null || name.trim().isEmpty() ||
+			        number == null || number.trim().isEmpty() ||
+			        email == null || email.trim().isEmpty() ||
+			        address == null || address.trim().isEmpty() ||
+			        city == null || city.trim().isEmpty() ||
+			        pincode == null || pincode.trim().isEmpty() ||
+			        province == null || province.trim().isEmpty() ||
+			        payment == null || payment.trim().isEmpty()) {
+
+			        session.setAttribute("credential", "Please enter all the details!!!");
+			        response.sendRedirect("checkout.jsp");
+			        return;
+			    }
+			
+			
+			
 			Cart c = (Cart) session.getAttribute("cart");
 			if(session.getAttribute("cart") != null) {
 		        List<CartItem> olist = c.getItems();

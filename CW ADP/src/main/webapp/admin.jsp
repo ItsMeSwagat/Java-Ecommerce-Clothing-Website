@@ -35,10 +35,6 @@ else{
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
 
-
-    <!-- Font awesome link-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     
     <!--css link-->
     <link rel="stylesheet" href="css/admin_style.css">
@@ -59,8 +55,8 @@ else{
         </nav>
 
         <div class="icons">
-            <div id="menu-btn" class="fas fa-bars"></div>
-            <div id="user-btn" class="fas fa-user"></div>
+            <div id="menu-btn"><img src="images/menu.png" style="width: 2.4rem; height: 2.4rem;"></div>
+            <div id="user-btn"><img src="images/user.png" style="width: 2.4rem; height: 2.4rem;"></div>
         </div>
         
         <div class="account-box">
