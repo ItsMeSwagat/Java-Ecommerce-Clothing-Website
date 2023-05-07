@@ -40,7 +40,7 @@ public class loginServlet extends HttpServlet {
 			pst.setString(2, password);
 			
 			ResultSet rs = pst.executeQuery();
-			 if (email.isEmpty() == false || password.isEmpty()== false) {
+			 if (email.isEmpty() == false && password.isEmpty()== false) {
 	                if (rs.next()) {
 	                    //Storing the login details in session
 	                    hs.setAttribute("current_user", rs.getInt("isAdmin"));

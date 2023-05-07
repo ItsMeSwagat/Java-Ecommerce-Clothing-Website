@@ -26,7 +26,6 @@ else{
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.controller.*" %>
 <%@ page import="com.model.*" %>
-<%@ page import="com.view.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>

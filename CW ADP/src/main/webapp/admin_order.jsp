@@ -20,7 +20,6 @@ else{
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.controller.*" %>
 <%@ page import="com.model.*" %>
-<%@ page import="com.view.*" %>
 <%@ page import="java.util.List" %> 
 
 <!DOCTYPE html>
