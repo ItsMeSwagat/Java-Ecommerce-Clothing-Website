@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="com.order.*" %>
-<%@ page import="com.cart.*" %>
-<%@ page import="com.register.*" %>
+<%@ page import="com.controller.*" %>
+<%@ page import="com.model.*" %>
 <%@ page import="java.util.List" %>    
 <%    
 if(session.getAttribute("current_user") != null){
@@ -45,9 +44,18 @@ else{
     orderDao orderDao = new orderDao();
     
     List<order> olist = orderDao.getOrder(u.getEmail());
-	%>
+    %>
+    
 	<section class="placed-orders">
 		<h1 class="title">placed orders</h1>
+		<% 
+		if(olist.isEmpty()){
+		    %>
+		    	<div class="btn" style="text-align: center; margin-left: 68rem; margin-bottom: 2rem; pointer-events: none;">No Order Placed.</div>
+		    <%
+		    }
+		else{
+			%>
 		
 		<div class="box-container">
 		
@@ -69,7 +77,10 @@ else{
 				<p>price : <span>Rs <%=itemTotal %> /-</span></p>
 				<p>payment type : <span><%=o.getPayment() %></span></p>
 			</div>
-		<%} %>	
+		<%
+			}
+		}
+		%>	
 		</div>
 	
 	</section>

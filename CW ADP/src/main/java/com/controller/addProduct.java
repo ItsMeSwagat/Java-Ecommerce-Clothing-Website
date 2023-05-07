@@ -1,4 +1,4 @@
-package com.productOperation;
+package com.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.connection.DatabaseConnection;
+import com.model.*;
 
 /**
  * Servlet implementation class ProductOperation
@@ -31,19 +32,53 @@ public class addProduct extends HttpServlet {
     
     public addProduct() {
         super();
-        // TODO Auto-generated constructor stub
+       
     }
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String p_name = request.getParameter("p_name");
-		int p_price = Integer.parseInt(request.getParameter("p_price"));
-		int p_quantity = Integer.parseInt(request.getParameter("p_quantity"));
+		String p_price_str = request.getParameter("p_price");
+		String p_quantity_str = request.getParameter("p_quantity");
 		String p_category = request.getParameter("p_category");
 		Part part= request.getPart("p_image");
 		
 		HttpSession hs = request.getSession();
+		
+		// Validate input fields
+		if (p_name == null || p_name.trim().isEmpty()) {
+		    hs.setAttribute("credential", "Please enter product name");
+		    response.sendRedirect("admin_product.jsp");
+		    return;
+		}
+
+		if (p_price_str == null || p_price_str.trim().isEmpty()) {
+		    hs.setAttribute("credential", "Please enter price!!");
+		    response.sendRedirect("admin_product.jsp");
+		    return;
+		}
+
+		if (p_quantity_str == null || p_quantity_str.trim().isEmpty()) {
+		    hs.setAttribute("credential", "Please enter quantity!!");
+		    response.sendRedirect("admin_product.jsp");
+		    return;
+		}
+
+		if (p_category == null || p_category.trim().isEmpty()) {
+		    hs.setAttribute("credential", "Please select a category!!");
+		    response.sendRedirect("admin_product.jsp");
+		    return;
+		}
+
+		if (part == null || part.getSize() == 0) {
+		    hs.setAttribute("credential", "Please select an image!!");
+		    response.sendRedirect("admin_product.jsp");
+		    return;
+		}
+		
+		int p_price = Integer.parseInt(p_price_str);
+		int p_quantity = Integer.parseInt(p_quantity_str);
 		
 		product p = new product();
 		p.setP_name(p_name);

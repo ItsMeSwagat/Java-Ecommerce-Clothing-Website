@@ -13,8 +13,8 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import="com.productOperation.product" %>
-<%@ page import="com.productOperation.*" %>
+<%@ page import="com.controller.*" %>
+<%@ page import="com.model.*" %>
 <%@ page import="java.util.List" %>
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
     
@@ -48,6 +48,7 @@
         <input type="number" name="u_price" value="<%=product.getP_price() %>" class="box" placeholder="enter product price">
         <input type="number" name="u_quantity" value="<%=product.getP_quantity() %>" class="box" placeholder="enter product quantity">
         <select name="u_category" class="box">
+        	<option value="<%=product.getP_category()%>">Selected : <%=product.getP_category()%> Wear</option>
         	<option value="Men">Mens Wear</option>
         	<option value="Women">Womens Wear</option>
         	<option value="children">Children Wear</option>

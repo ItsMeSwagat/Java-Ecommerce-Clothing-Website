@@ -1,4 +1,4 @@
-package com.productOperation;
+package com.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class searchProduct
- */
+import com.model.*;
+
 @WebServlet("/searchProduct")
 public class searchProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;

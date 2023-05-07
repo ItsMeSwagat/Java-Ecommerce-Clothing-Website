@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.List" %>    
-<%@ page import="com.cart.*" %> 
-<%@ page import="com.cart.CartItem" %>
-<%@ page import="com.productOperation.*" %>  
+<%@ page import="com.controller.*" %>
+<%@ page import="com.model.*" %>
+<%@ page import="com.view.*" %>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
     
 <%
@@ -30,15 +30,13 @@ else{
 <meta charset="ISO-8859-1">
 <title>cart</title>
 
-  <!-- Font awesome link-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!--css link-->
     <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
-	<%@include file= "navbar.jsp" %>
+	<%@include file="navbar.jsp"%>
 	<section class="shopping-cart">
 	
 		<div class="heading">

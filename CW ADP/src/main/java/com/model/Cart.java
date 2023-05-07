@@ -1,10 +1,8 @@
-package com.cart;
+package com.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.productOperation.ProductDao;
-import com.productOperation.product;
 
 public class Cart {
     private List<CartItem> items;

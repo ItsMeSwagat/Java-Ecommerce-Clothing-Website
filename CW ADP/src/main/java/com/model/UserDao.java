@@ -1,4 +1,4 @@
-package com.register;
+package com.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

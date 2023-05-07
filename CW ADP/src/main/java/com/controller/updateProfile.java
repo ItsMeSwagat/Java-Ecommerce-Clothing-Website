@@ -1,4 +1,4 @@
-package com.register;
+package com.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,20 +19,16 @@ import javax.servlet.http.Part;
 
 import com.connection.DatabaseConnection;
 
-/**
- * Servlet implementation class updateProfile
- */
+
 @WebServlet("/updateProfile")
 @MultipartConfig
 public class updateProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+   
     public updateProfile() {
         super();
-        // TODO Auto-generated constructor stub
+       
     }
 
 	

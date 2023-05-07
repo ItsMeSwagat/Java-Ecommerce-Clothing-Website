@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import="com.register.*" %>
-    <%@ page import="com.cart.Cart" %>
-    <jsp:useBean id="cart" class="com.cart.Cart" scope="session" />
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.controller.*" %>
+<%@ page import="com.model.*" %>
+<jsp:useBean id="cart" class="com.model.Cart" scope="session" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
     <% int NoOfItems = cart.getNumberOfItems();%>
 <!DOCTYPE html>

@@ -22,8 +22,8 @@ else{
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="com.productOperation.product" %>
-<%@ page import="com.productOperation.*" %>
+<%@ page import="com.controller.*" %>
+<%@ page import="com.model.*" %>
 <%@ page import="java.util.List" %>
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
     
@@ -76,15 +76,15 @@ else{
     <form action="addProduct" method="post" enctype="multipart/form-data">
     	<%@include file="Message/AlertMessage.jsp"%>
         <h3>Add Product</h3>
-        <input type="text" name="p_name" class="box" placeholder="enter product name" required>
-        <input type="number" name="p_price" class="box" placeholder="enter product price" required>
-        <input type="number" name="p_quantity" class="box" placeholder="enter product quantity" required>
+        <input type="text" name="p_name" class="box" placeholder="enter product name">
+        <input type="number" name="p_price" class="box" placeholder="enter product price">
+        <input type="number" name="p_quantity" class="box" placeholder="enter product quantity">
         <select name="p_category" class="box">
         	<option value="Men">Mens Wear</option>
         	<option value="Women">Womens Wear</option>
         	<option value="children">Children Wear</option>
         </select>        
-        <input type="file" name="p_image" accept="image/jpg, image/jpeg, image/png"  class="box" placeholder="enter product name" required>
+        <input type="file" name="p_image" accept="image/jpg, image/jpeg, image/png"  class="box">
         <input type="submit" value="add product" name="add_product" class="btn">
     </form>
 

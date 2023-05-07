@@ -1,4 +1,4 @@
-package com.productOperation;
+package com.model;
 
 public class product {
 	

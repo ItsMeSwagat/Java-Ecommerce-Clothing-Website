@@ -18,9 +18,9 @@ else{
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="com.order.*" %>
-<%@ page import="com.cart.*" %>
-<%@ page import="com.register.*" %>
+<%@ page import="com.controller.*" %>
+<%@ page import="com.model.*" %>
+<%@ page import="com.view.*" %>
 <%@ page import="java.util.List" %> 
 
 <!DOCTYPE html>

@@ -1,4 +1,4 @@
-package com.order;
+package com.model;
 
 
 public class order {

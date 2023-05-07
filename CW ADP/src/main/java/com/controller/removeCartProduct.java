@@ -1,4 +1,4 @@
-package com.cart;
+package com.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,9 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class removeCartProduct
- */
+import com.model.*;
+
 @WebServlet("/removeCartProduct")
 public class removeCartProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;

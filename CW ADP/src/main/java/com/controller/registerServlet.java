@@ -1,4 +1,4 @@
-package com.register;
+package com.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.connection.DatabaseConnection;
+import com.model.*;
 /**
  * Servlet implementation class registerServlet
  */
@@ -36,22 +37,20 @@ public class registerServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		Part part = request.getPart("image");
 		
-		String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-		InputStream fileContent = part.getInputStream();
-		Files.copy(fileContent, Paths.get(getServletContext().getRealPath("/images"), fileName), StandardCopyOption.REPLACE_EXISTING);
-		
 		HttpSession hs = request.getSession();
 		RequestDispatcher dispatcher = null;
 		
-		// Validation
-        boolean isValid = true;
-        if (name.isEmpty()) {
+		
+		//Validation
+        if (name == null || name.isEmpty()) {
             hs.setAttribute("credential", "Please enter your name.");
-            isValid = false;
+            response.sendRedirect("register.jsp");
+            return;
         }
-        if (email.isEmpty()) {
+        if (email == null || email.isEmpty()) {
             hs.setAttribute("credential", "Please enter a valid email.");
-            isValid = false;
+            response.sendRedirect("register.jsp");
+            return;
         } else {
             try {
                 Connection con = DatabaseConnection.getConnection();
@@ -61,7 +60,7 @@ public class registerServlet extends HttpServlet {
                 ResultSet rs = pst.executeQuery();
                 if (rs.next()) {
                     hs.setAttribute("credential", "Email already exists.");
-                    isValid = false;
+                    response.sendRedirect("register.jsp");
                 }
             } catch (Exception ex) {
                 hs.setAttribute("credential", "Something went wrong. Please try again later.");
@@ -69,23 +68,27 @@ public class registerServlet extends HttpServlet {
                 dispatcher.forward(request, response);
             }
         }
-        if (phonenumber.isEmpty() || !phonenumber.matches("\\d{10}")) {
+        if (phonenumber == null || phonenumber.isEmpty() || !phonenumber.matches("\\d{10}")) {
             hs.setAttribute("credential", "Please enter a valid phone number.");
-            isValid = false;
+            response.sendRedirect("register.jsp");
+            return;
         }
-        if (address.isEmpty()) {
+        if (address == null || address.isEmpty()) {
             hs.setAttribute("credential", "Please enter your address.");
-            isValid = false;
+            response.sendRedirect("register.jsp");
+            return;
         }
-        if (password.isEmpty() || password.length() < 8) {
-            hs.setAttribute("credential", "Please enter a password with minimum 8 characters.");
-            isValid = false;
+        if (password == null || password.isEmpty() || password.length() < 16) {
+            hs.setAttribute("credential", "Please enter a password with minimum 16 characters.");
+            response.sendRedirect("register.jsp");
+            return;
         }
-
-        if (!isValid) {
-            dispatcher = request.getRequestDispatcher("register.jsp");
-            dispatcher.forward(request, response);
-        } else {
+        if (part == null || part.getSize() == 0) {
+		    hs.setAttribute("credential", "Please select an image!!");
+		    response.sendRedirect("register.jsp");
+            return;
+		}
+        
         	
         
 			user u = new user();
@@ -94,6 +97,10 @@ public class registerServlet extends HttpServlet {
 			u.setPhonenumber(phonenumber);
 			u.setAddress(address);
 			u.setPassword(password);
+			
+			String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+			InputStream fileContent = part.getInputStream();
+			Files.copy(fileContent, Paths.get(getServletContext().getRealPath("/images"), fileName), StandardCopyOption.REPLACE_EXISTING);
 			u.setImage(fileName);
 			
 		
@@ -108,7 +115,6 @@ public class registerServlet extends HttpServlet {
 			    pst.setString(4, u.getAddress());
 			    pst.setString(5, u.getPassword());
 			    pst.setString(6, u.getImage());
-			        	
 			    int rowCount = pst.executeUpdate();
 			    dispatcher = request.getRequestDispatcher("register.jsp");
 			    if (rowCount > 0) {
@@ -128,7 +134,5 @@ public class registerServlet extends HttpServlet {
 			}
         }
 		
-
-	}
 
 }

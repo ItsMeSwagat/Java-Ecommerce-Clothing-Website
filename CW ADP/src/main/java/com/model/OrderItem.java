@@ -1,5 +1,5 @@
-package com.order;
-import com.productOperation.product;
+package com.model;
+
 
 public class OrderItem {
 	

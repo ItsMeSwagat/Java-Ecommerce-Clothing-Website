@@ -24,9 +24,9 @@ else{
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="com.productOperation.*" %>
-<%@ page import="com.register.*" %>
-<%@ page import="com.order.*" %>
+<%@ page import="com.controller.*" %>
+<%@ page import="com.model.*" %>
+<%@ page import="com.view.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -1,4 +1,4 @@
-package com.register;
+package com.model;
 
 public class user {
 	

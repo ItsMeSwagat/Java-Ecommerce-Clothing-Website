@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-<%@ page import="com.productOperation.product" %>
-<%@ page import="com.productOperation.*" %>
+<%@ page import="com.controller.*" %>
+<%@ page import="com.model.*" %>
 <%@ page import="java.util.List" %>    
-<%@ page import="com.cart.*" %> 
-<%@ page import="com.cart.CartItem" %>
 
 <%    
     if(session.getAttribute("current_user") != null){

@@ -1,6 +1,5 @@
-package com.cart;
+package com.model;
 
-import com.productOperation.product;
 
 public class CartItem {
     private product product;
