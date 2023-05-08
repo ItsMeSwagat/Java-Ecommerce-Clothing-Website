@@ -37,6 +37,7 @@ public class registerServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		Part part = request.getPart("image");
 		
+		
 		HttpSession hs = request.getSession();
 		RequestDispatcher dispatcher = null;
 		
@@ -88,7 +89,8 @@ public class registerServlet extends HttpServlet {
 		    response.sendRedirect("register.jsp");
             return;
 		}
-        
+        else
+        {
         	
         
 			user u = new user();
@@ -97,10 +99,10 @@ public class registerServlet extends HttpServlet {
 			u.setPhonenumber(phonenumber);
 			u.setAddress(address);
 			u.setPassword(password);
-			
 			String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 			InputStream fileContent = part.getInputStream();
 			Files.copy(fileContent, Paths.get(getServletContext().getRealPath("/images"), fileName), StandardCopyOption.REPLACE_EXISTING);
+			
 			u.setImage(fileName);
 			
 		
@@ -133,6 +135,7 @@ public class registerServlet extends HttpServlet {
 					
 			}
         }
+	}
 		
 
 }

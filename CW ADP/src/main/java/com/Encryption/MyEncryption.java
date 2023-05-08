@@ -6,6 +6,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 public class MyEncryption {
+
 	 public static String encrypt(String strToEncrypt, String secretKey) {
 	        Key key = generateKey(secretKey);
 	        Cipher cipher;
